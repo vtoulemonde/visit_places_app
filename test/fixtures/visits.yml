@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  place_id: 
+  date: MyString
+  rating: 1
+  comment: MyText
+
+two:
+  place_id: 
+  date: MyString
+  rating: 1
+  comment: MyText

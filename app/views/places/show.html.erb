@@ -1,0 +1,16 @@
+<h1>Existing Place</h1>
+
+<div style="display:inline;float:left;">
+	<p>Name: <%=@place.name%></p>
+	<p>Address: <%=@place.address%></p>
+	<p>Type: <%=@place.gender%></p>
+	<p>Price: <%=@place.price%></p>
+
+	<%= link_to 'Not that place, create a new one', new_place_path%>
+
+	<%= render 'visits/form' %>
+</div>
+
+<div style="display:inline;float:left;">
+	<div id="map-canvas"></div>
+</div>

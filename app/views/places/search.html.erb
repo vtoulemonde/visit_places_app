@@ -1,0 +1,19 @@
+<%= form_tag search_result_path, method: :GET do %>
+    <div >
+    <%= text_field_tag :search, nil, class: "form-control" %>
+    </div>
+    <%= submit_tag "Search", class: "btn btn-primary"%>
+<% end %>
+<h2>Existing places</h2>
+<% @places.each do |place|%>
+	<p><a href="places/<%=place.id%>"><%=place.name%> | <%=place.address%> | <%=place.gender%></a></p>
+<% end %>
+
+<h2>Suggesting places by Google Maps</h2>
+<% @data.each do |info|%>
+	<p><<%=info.formatted_address%></p>
+<% end %>
+
+<%= link_to 'Create a new place', new_place_path%><br />
+<%= link_to 'All places', places_path%><br />
+<%= link_to 'All visits', visits_all_path%>

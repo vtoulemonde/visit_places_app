@@ -1,0 +1,44 @@
+<% if @place.errors.any? %>
+  <% @place.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
+<% end %>
+
+<div style="display:inline;float:left;">
+  <%= form_for @place do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <p>Fill the address and place on the map or just click on the map to determine the address</p>
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+    <button id="pin_map">Place on the map</button>
+  </div>
+  <div>
+    <%= f.label :lat %>
+    <%= f.text_field :lat %>
+  </div>
+  <div>
+    <%= f.label :lng %>
+    <%= f.text_field :lng %>
+  </div>
+  <div>
+    <%= f.label :gender %> (Restaurant, Bar/Club, Museum, Art, Park, Other...)
+    <%= f.text_field :gender %>
+  </div>
+  <div>
+    <%= f.label :price %> (Free, $, $$, $$$)
+    <%= f.text_field :price %>
+  </div>
+  <div>
+    <%= f.submit%>
+    <%= link_to 'Back', places_path %>
+  </div>
+  <% end %>
+</div>
+
+<div style="display:inline;float:left;">
+  <div id="map-canvas"></div>
+</div>

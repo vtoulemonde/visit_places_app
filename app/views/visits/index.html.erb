@@ -1,0 +1,12 @@
+<h1>All my visits</h1>
+
+<% @visits.each do |visit|%>
+	<p>
+		<%=visit.place.id%> | <%=visit.place.name%> | <%=visit.id%> | <%=visit.date%> | <%=visit.rating%> | <%=visit.comment%>
+		<%= link_to "Edit", edit_place_visit_path(visit.place, visit)%>
+		<%= link_to 'Delete', place_visit_path(visit.place, visit),
+	                    method: :delete, data: { confirm: 'Are you sure?' }%>
+	</p>
+<% end %>
+
+<%= link_to 'All places', places_path%><br />
