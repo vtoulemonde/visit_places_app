@@ -5,7 +5,7 @@ class PlacesController < ApplicationController
 	end
 
 	def search
-		@places = Place.all
+		@places = []
 		@data = []
 	end
 
@@ -16,16 +16,16 @@ class PlacesController < ApplicationController
 		# Search with google maps API
 		@data = search_geocoding search_place
 		
-		if @places.empty? && @data.results.empty?
+		if @places.empty? && (@data.nil? || @data.results.empty?)
 			@place = Place.new
 			@visit = Visit.new
 			render :new
-		elsif @places.count == 1 && @data.results.empty?
+		elsif @places.count == 1 && (@data.nil? || @data.results.empty?)
 			# If only one result from existing place, show the place to create a visit
-			@place = results[0]
+			@place = @places[0]
 			@visit = Visit.new
 			render :show
-		elsif @places.empty? && @data.results.count == 1
+		elsif @places.empty? && !@data.nil? && @data.results.count == 1
 			# If one result from Google API, prefill data to create new place
 			flash[:info] = "Here is a proposition for your place. Feel free to modify the information."
   			@place.name = search_place
@@ -36,7 +36,7 @@ class PlacesController < ApplicationController
   			render :new
 		else
 			# If several results, let the user choose which one
-			render :index
+			render :search
 		end
 	end
 
@@ -58,7 +58,7 @@ class PlacesController < ApplicationController
 	def edit
 		@place = Place.find(params[:id])
 	end
-	
+
 	def update
 		# TODO Get the latLong of the place with google map geocoding if not specify
 		@place = Place.find(params[:id])
@@ -90,8 +90,8 @@ class PlacesController < ApplicationController
 
 	def search_geocoding(address)
 		# data = Typhoeus.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyBMjQW_pHVa_SJleQQX2BC51pJ4UyhVbK0")
-		# JSON.parse(data.body)
-		[]
+		# JSON.parse(data.body
+
 	end
 
 end

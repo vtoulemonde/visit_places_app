@@ -1,8 +1,6 @@
 class VisitsController < ApplicationController
 	def index
-		# TODO search only the visit of the user logged_in
-		# TODO how to get the data of the place with the visit
-		@visits = Visit.all
+		@visits = Visit.where user_id: session[:current_user_id]
 	end
 
 	def all
@@ -14,11 +12,13 @@ class VisitsController < ApplicationController
 
 	def create
 		@place = Place.find(params[:place_id])
-		@visit = @place.visits.create visit_params
+		@visit = Visit.new visit_params
+		@visit.place_id = @place.id
+		@visit.user_id = session[:current_user_id]
 
-		if @visit.valid?
+		if @visit.save
 			flash[:success] = "Your visit has been created."
-			redirect_to places_path
+			redirect_to visits_path
 		else
 			flash[:error] = "Error: Your visit has not been created."
 			render place_path(@place)
@@ -43,7 +43,7 @@ class VisitsController < ApplicationController
 		@visit = Visit.find(params[:id])
 		@visit.destroy
 		flash[:success] = "Your visit has been deleted."
-		redirect_to place_visits_path
+		redirect_to visits_path
 	end
 
 	private

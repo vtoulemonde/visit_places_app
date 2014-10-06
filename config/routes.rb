@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   	get 'search_result' =>'places#search_result'
   	get 'visits/all' => 'visits#all'
 
+  	resources :visits, only: :index
+
   	resources :places do
-    	resources :visits
+    	resources :visits, except: :index
 	end
 
     root 'welcome#index'
