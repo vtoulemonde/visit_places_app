@@ -1,17 +1,34 @@
+<!-- Search form -->
 <%= form_tag search_result_path, method: :GET do %>
     <div >
-    <%= text_field_tag :search, nil, class: "form-control" %>
+    <%= text_field_tag :search, @search, class: "form-control" %>
     </div>
     <%= submit_tag "Search", class: "btn btn-primary"%>
 <% end %>
+
+<!-- Result of search in database -->
 <h2>Existing places</h2>
 <% @places.each do |place|%>
-	<p><a href="places/<%=place.id%>"><%=place.name%> | <%=place.address%> | <%=place.gender%></a></p>
+	<p>
+		<%=place.name%> | <%=place.address%> | <%=place.gender%>
+		<%= link_to "Choose", place_path(place)%>
+	</p>
 <% end %>
 
+<!-- Result of search with Google Map API -->
 <h2>Suggesting places by Google Maps</h2>
 <% @data.each do |info|%>
-	<p><%=info.formatted_address%></p>
+	<p>
+		<%= form_tag new_place_path, method: :GET do %>
+			
+			<%=info['formatted_address']%>
+			<%= hidden_field_tag :name, @search%>
+			<%= hidden_field_tag :address, info['formatted_address']%>
+			<%= hidden_field_tag :lat, info['geometry']['location']['lat']%>
+			<%= hidden_field_tag :lng, info['geometry']['location']['lng']%>
+			<%= submit_tag "Choose"%>
+		<% end %>
+	</p>
 <% end %>
 
 <%= link_to 'Create a new place', new_place_path%><br />
