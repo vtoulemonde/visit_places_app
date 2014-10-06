@@ -11,6 +11,16 @@ class UsersController < ApplicationController
         end
     end
 
+    def index
+        @users = []
+        if (params[:search] == 'all')
+            @users = User.all
+        elsif (params[:search] !='')
+            @users = User.where(username: params[:search])
+        end
+        render :index
+    end
+
     private
 
     def user_params

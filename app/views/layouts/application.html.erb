@@ -14,7 +14,10 @@
 	<% if logged_in? %>
     	Logged in as <%= current_user.username %> (<%= current_user.id %>).<br> 
     	Menu: <%= link_to 'Visits history', visits_path%> / 
-    	<%= link_to 'Enter new visit', search_path%><br />
+    	<%= link_to 'Enter new visit', search_path%> / 
+      <%= link_to 'My friends', friendships_path%> / 
+    	<%= link_to "Find Friends", users_path %> / 
+    	<%= link_to 'Logout', sessions_path, method: :delete %><br />
     	Admin actions:    <%= link_to 'All places', places_path%> / <%= link_to 'All visits', visits_all_path%>
     <%end%>
 

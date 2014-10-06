@@ -11,7 +11,7 @@
 
 <h2>Suggesting places by Google Maps</h2>
 <% @data.each do |info|%>
-	<p><<%=info.formatted_address%></p>
+	<p><%=info.formatted_address%></p>
 <% end %>
 
 <%= link_to 'Create a new place', new_place_path%><br />

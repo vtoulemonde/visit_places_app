@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+	resources 'friendships'
+
   	get 'search' =>'places#search'
   	get 'search_result' =>'places#search_result'
   	get 'visits/all' => 'visits#all'
