@@ -7,31 +7,33 @@ class PlacesController < ApplicationController
 	def search
 		@places = []
 		@data = []
+		@search = ''
 	end
 
 	def search_result
-		search_place = params[:search]
+		@search = params[:search]
 		# Search in database
-		@places = Place.where("name like ? or address like ?", "%#{search_place}%", "%#{search_place}%")
+		@places = Place.where("name like ? or address like ?", "%#{@search}%", "%#{@search}%")
 		# Search with google maps API
-		@data = search_geocoding search_place
+		@data = search_geocoding @search
 		
-		if @places.empty? && (@data.nil? || @data.results.empty?)
+		if @places.empty? && @data.empty?
 			@place = Place.new
 			@visit = Visit.new
 			render :new
-		elsif @places.count == 1 && (@data.nil? || @data.results.empty?)
+		elsif @places.count == 1 && @data.empty?
 			# If only one result from existing place, show the place to create a visit
 			@place = @places[0]
 			@visit = Visit.new
 			render :show
-		elsif @places.empty? && !@data.nil? && @data.results.count == 1
+		elsif @places.empty? && @data.count == 1
 			# If one result from Google API, prefill data to create new place
 			flash[:info] = "Here is a proposition for your place. Feel free to modify the information."
-  			@place.name = search_place
-  			@place.address = @data.results[0].formatted_address
-  			@place.lat = @data.results[0].geometry.location.lat
-  			@place.lng = @data.results[0].geometry.location.lng
+  			@place = Place.new
+  			@place.name = search
+  			@place.address = @data[0]['formatted_address']
+  			@place.lat = @data[0]['geometry']['location']['lat']
+  			@place.lng = @data[0]['geometry']['location']['lng']
   			@visit = Visit.new
   			render :new
 		else
@@ -42,14 +44,17 @@ class PlacesController < ApplicationController
 
 	def new
 		@place = Place.new
+		@place.name = params[:name] if params[:name]
+		@place.address = params[:address] if params[:address]
+		@place.lat = params[:lat] if params[:lat]
+		@place.lng = params[:lng] if params[:lng]
 	end
 
 	def create
-		# TODO Get the latLong of the place with google map geocoding if not specify
 		@place = Place.new(place_params)
 		if @place.save
 			flash[:success] = "Your place has been created."
-			redirect_to places_path
+			redirect_to place_path(@place)
 		else
 			render 'new'
 		end
@@ -60,7 +65,6 @@ class PlacesController < ApplicationController
 	end
 
 	def update
-		# TODO Get the latLong of the place with google map geocoding if not specify
 		@place = Place.find(params[:id])
 		if @place.update place_params
 			flash[:success] = "Your place has been updated."
@@ -85,13 +89,19 @@ class PlacesController < ApplicationController
 	private
 
 	def place_params
-		params.require(:place).permit(:name, :address, :gender, :price)
+		params.require(:place).permit(:name, :address, :gender, :price, :lat, :lng)
 	end
 
-	def search_geocoding(address)
-		# data = Typhoeus.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyBMjQW_pHVa_SJleQQX2BC51pJ4UyhVbK0")
-		# JSON.parse(data.body
-
+	def search_geocoding(search)
+		address = search.gsub(' ','%20')
+		data = Typhoeus.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyBMjQW_pHVa_SJleQQX2BC51pJ4UyhVbK0")
+		# puts data
+		data = JSON.parse(data.body)
+		if data['status'] == 'OK'
+			return data['results']
+		else
+			return []
+		end
 	end
 
 end

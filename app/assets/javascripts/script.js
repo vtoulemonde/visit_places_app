@@ -1,7 +1,7 @@
 function initialize() {
 
-  	var place_lat = $('#place_lat').val();
-  	var place_lng = $('#place_lng').val();
+  	var place_lat = parseFloat($('#place_lat').val());
+  	var place_lng = parseFloat($('#place_lng').val());
 
   	// Create the map center on the location or on SF by default
   	if (place_lat && place_lng){
@@ -18,7 +18,7 @@ function initialize() {
 
     // Create the pin of the place if the location is determine when display page
     if (place_lat && place_lng){
-    	createPin(place_lat, place_lng)
+    	createPin(place_lat, place_lng, true)
     }
 
     function clearPin(){
@@ -27,23 +27,24 @@ function initialize() {
     	}
     }
 
-    function createPin(lat, lng){
-    	var myLatlng = new google.maps.LatLng(place_lat, place_lng);
+    function createPin(lat, lng, recenter){
+    	var myLatlng = new google.maps.LatLng(lat, lng);
     	marker = new google.maps.Marker({
     		position: myLatlng,
     		map: map,
-    		title: "Hello"
-    		// title: $('#place_name').val()
+    		// title: "Hello"
+    		title: $('#place_name').val()
     	});
-    	map.setCenter(myLatlng);
+      if (recenter){map.setCenter(myLatlng);}
     }
 
 	// Add an event when click on the map to update the address
 	google.maps.event.addListener(map, 'click', function(event) {
 		var click_lat = event.latLng.k;
 		var click_lng = event.latLng.B;
+    console.log('Click '+ click_lat+' '+ click_lng)
 		clearPin();
-		createPin(click_lat, click_lng);
+		createPin(click_lat, click_lng, false);
 		$('#place_lat').val(click_lat);
 		$('#place_lng').val(click_lng);
 	});
@@ -60,16 +61,18 @@ function initialize() {
 	  	});
 
 	  	request.done(function(data){
+        console.log('here')
 	  		if(data.results.length == 0){
 	  			alert("INVALID ADDRESS")
 	  		} else {
 	  			var geo_lat = data.results[0].geometry.location.lat;
 	  			var geo_lng = data.results[0].geometry.location.lng;
 	  			clearPin();
-	  			createPin(geo_lat, geo_lng);
+	  			createPin(geo_lat, geo_lng, true);
+          $('#place_lat').val(geo_lat);
+          $('#place_lng').val(geo_lng);
 	  		}
 	  	});
 	});
 }
 
-// google.maps.event.addDomListener(window, 'load', initialize);
