@@ -1,6 +1,10 @@
 class VisitsController < ApplicationController
 	def index
 		@visits = Visit.where(user_id: session[:current_user_id]).order('date DESC')
+		respond_to do |format|
+			format.html{}
+			format.json{render json: @visits.to_json(:include =>[:place])}
+		end
 	end
 
 	def all
