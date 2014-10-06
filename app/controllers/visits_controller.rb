@@ -1,11 +1,9 @@
 class VisitsController < ApplicationController
 	def index
-		@visits = Visit.where user_id: session[:current_user_id]
+		@visits = Visit.where(user_id: session[:current_user_id]).order('date DESC')
 	end
 
 	def all
-		# TODO search only the visit of the user logged_in
-		# TODO how to get the data of the place with the visit
 		@visits = Visit.all
 		render :index
 	end
