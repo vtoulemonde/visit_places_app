@@ -10,7 +10,7 @@
 <h2>Existing places</h2>
 <% @places.each do |place|%>
 	<p>
-		<%=place.name%> | <%=place.address%> | <%=place.gender%>
+		<%=place.name%> | <%= image_tag(place.picture_url, :width => 300) if place.picture.present? %> | <%=place.address%> | <%=place.gender%>
 		<%= link_to "Choose", place_path(place)%>
 	</p>
 <% end %>

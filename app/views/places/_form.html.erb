@@ -17,6 +17,10 @@
     <button id="pin_map">Place on the map</button>
   </div>
   <div>
+    <%= f.label :picture %><br>
+    <%= f.file_field :picture %>
+  </div>
+  <div>
     <%= f.label :lat %>
     <%= f.text_field :lat %>
   </div>

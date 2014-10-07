@@ -2,6 +2,7 @@
 
 <div style="display:inline;float:left;">
 	<p>Name: <%=@place.name%></p>
+	<p><%= image_tag(@place.picture_url, :width => 300) if @place.picture.present? %></p>
 	<p>Address: <%=@place.address%></p>
 	<p>Type: <%=@place.gender%></p>
 	<p>Price: <%=@place.price%></p>
