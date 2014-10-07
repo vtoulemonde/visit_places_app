@@ -16,6 +16,10 @@ class VisitsController < ApplicationController
 
 		if @visit.save
 			flash[:success] = "Your visit has been created."
+			@photo = Photo.new
+			@photo.picture = params[:visit][:picture]
+			@photo.visit_id = @visit.id
+			@photo.save
 			redirect_to user_visits_path(current_user)
 		else
 			flash[:error] = "Error: Your visit has not been created."
@@ -26,16 +30,28 @@ class VisitsController < ApplicationController
 	def edit
 		@visit = Visit.find(params[:id])
 		@place = @visit.place
-		@placephoto = Place.find(params[:id])
 	end
 
 	def update
 		@visit = Visit.find(params[:id])
-		if @visit.update visit_params
-			redirect_to place_visits_path
+
+		if @visit.update(visit_params)
+			redirect_to user_visits_path(current_user)
 		else
 			render :edit
 		end
+	end
+
+	def addphoto
+		@visit = Visit.find(params[:id])
+	end
+
+	def createphoto
+		@photo = Photo.new
+		@photo.picture = params[:visit][:picture]
+		@photo.visit_id = params[:id]
+		@photo.save
+		redirect_to user_visits_path(current_user)
 	end
 
 	def destroy
