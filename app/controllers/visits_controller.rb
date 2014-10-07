@@ -26,7 +26,6 @@ class VisitsController < ApplicationController
 	def edit
 		@visit = Visit.find(params[:id])
 		@place = @visit.place
-		@placephoto = Place.find(params[:id])
 	end
 
 	def update
