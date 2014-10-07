@@ -1,6 +1,7 @@
 <h1>Edit visits</h1>
 
 <p>Name: <%=@place.name%></p>
+<p><%= image_tag(@placephoto.picture_url, :width => 300) if @placephoto.picture.present? %></p>
 <p>Address: <%=@place.address%></p>
 <p>Type: <%=@place.gender%></p>
 <p>Price: <%=@place.price%></p>
