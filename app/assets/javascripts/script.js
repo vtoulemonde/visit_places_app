@@ -89,7 +89,7 @@ function initializeVisitsMap(){
         mapOptions);
 
       var request = $.ajax({
-        url: "/visits",
+        url: "/users/"+$('#user_id').val()+"/visits",
         type: "GET",
         dataType: "json"
       });
