@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
-
+    include UsersHelper
     def create
         @user = User.new(user_params)
 
         if @user.save
             flash[:notice] = "Your account has been created! Please login."
+            sendEmail(@user.email)
             redirect_to root_path
         else
             render "welcome/index"
@@ -39,6 +40,7 @@ class UsersController < ApplicationController
     def user_params
         params.require(:user).permit(
             :username,
+            :email,
             :password,
             :password_confirmation,
             :picture

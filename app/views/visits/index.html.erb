@@ -2,8 +2,15 @@
 
 <div style="display:inline;float:left;">
 	<% @visits.each do |visit|%>
+
 		<p>
-			<%=visit.place.id%> | <%=visit.place.name%> | <%=visit.id%> | <%=visit.date%> | <%=visit.rating%> | <%=visit.comment%>
+			<%=visit.place.id%> | <%=visit.place.name%> | <%= image_tag(visit.place.picture_url, :width => 300) if visit.place.picture.present? %> | <%=visit.id%> | <%=visit.date%> | <%=visit.rating%> | <%=visit.comment%> |		
+
+			<% visit.photos.each do |p| %>
+				<%= image_tag(p.picture_url, :width => 300)%>
+			<% end %>
+ 
+			<%= link_to "Add Photo", addphoto_path(visit) %>
 			<%= link_to "Edit", edit_place_visit_path(visit.place, visit)%>
 			<%= link_to 'Delete', place_visit_path(visit.place, visit),
 		                    method: :delete, data: { confirm: 'Are you sure?' }%>

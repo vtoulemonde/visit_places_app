@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  visit_id: 
+  picture: MyString
+
+two:
+  visit_id: 
+  picture: MyString
