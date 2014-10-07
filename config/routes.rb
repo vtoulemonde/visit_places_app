@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   	get 'search' =>'places#search'
   	get 'search_result' =>'places#search_result'
 
+    get 'visits/:id/addphoto' => 'visits#addphoto', as: "addphoto"
+
+    patch 'visits/:id/createphoto' => 'visits#createphoto', as: "createphoto"
+
   	resources :visits, only: :destroy do
   		resources :recommendations, only: [:create, :new]
   	end

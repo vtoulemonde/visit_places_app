@@ -6,6 +6,10 @@
 
 <%= form_for [@place, @visit] do |f| %>
   <div>
+    <%= f.label :picture %><br>
+    <%= f.file_field :picture %>
+  </div>
+  <div>
     <%= f.label :date %>
     <%= f.date_field :date %>
   </div>
