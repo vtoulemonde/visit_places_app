@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   	resources :places do
     	resources :visits, except: :index
-	end
+	  end
 
     root 'welcome#index'
     resources :users do

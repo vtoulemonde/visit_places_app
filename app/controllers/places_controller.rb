@@ -89,7 +89,7 @@ class PlacesController < ApplicationController
 	private
 
 	def place_params
-		params.require(:place).permit(:name, :address, :gender, :price, :lat, :lng)
+		params.require(:place).permit(:name, :address, :gender, :price, :lat, :lng, :picture)
 	end
 
 	def search_geocoding(search)
