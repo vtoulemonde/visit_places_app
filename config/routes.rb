@@ -6,14 +6,21 @@ Rails.application.routes.draw do
   	get 'search_result' =>'places#search_result'
   	get 'visits/all' => 'visits#all'
 
-  	resources :visits, only: :index
+  	resources :visits, only: :destroy do
+  		resources :recommendations, only: [:create, :new]
+  	end
 
   	resources :places do
     	resources :visits, except: :index
 	end
 
     root 'welcome#index'
-    resources :users
+    resources :users do
+    	resources :recommendations, only: :index
+    	resources :visits, only: :index
+    end
+    resources :recommendations, only: [:destroy, :show]
+
     post 'sessions' => 'sessions#create'
     delete 'sessions' => 'sessions#destroy'
 

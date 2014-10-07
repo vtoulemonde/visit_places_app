@@ -10,4 +10,14 @@ class User < ActiveRecord::Base
 
 	mount_uploader :picture, PictureUploader
 	
+	has_many :recommendations
+
+	def get_friends
+		friends = []
+		friendships.each do |friendship|
+			friends << friendship.friend
+		end
+		friends
+	end
+
 end

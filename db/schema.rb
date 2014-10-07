@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(version: 20141006233827) do
     t.datetime "updated_at"
   end
 
+  create_table "recommendations", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "visit_id"
+    t.text     "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "recommendations", ["user_id"], name: "index_recommendations_on_user_id", using: :btree
+  add_index "recommendations", ["visit_id"], name: "index_recommendations_on_visit_id", using: :btree
+
   create_table "users", force: true do |t|
     t.string   "username"
     t.string   "email"
