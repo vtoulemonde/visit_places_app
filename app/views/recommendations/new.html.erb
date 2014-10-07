@@ -1,0 +1,28 @@
+<h1>Recommendations#new</h1>
+
+
+<% if @recommendation.errors.any? %>
+  <% @recommendation.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
+<% end %>
+<%= @visit.place.name %>
+<%= @visit.place.address %>
+<%= @visit.date %>
+<%= @visit.rating %>
+<%= @visit.comment %>
+
+<%= form_for [@visit, @recommendation] do |f| %>
+	<div>
+  		<%= f.collection_select :user_id, current_user.get_friends, :id, :username %>
+  	</div>
+  	<div>
+    	<%= f.label :comment %>
+    	<%= f.text_area :comment %>
+  	</div>
+  
+  	<div>
+    	<%= f.submit%>
+    	<%= link_to 'Cancel', user_visits_path(current_user) %>
+  	</div>
+<% end %>

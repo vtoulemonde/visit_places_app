@@ -1,0 +1,32 @@
+<h1>Recommendations for <%=@user.username%></h1>
+
+<table>
+	<tr>
+		<th>Place name</th>
+		<th>Place address</th>
+		<th>Recommended by</th>
+		<th>Date of visit</th>
+		<th>Rating</th>
+		<th>Visit comment</th>
+		<th>Reco comment</th>
+		<th>Actions</th>
+	</tr>
+<% @recommendations.each do |recommendation| %>
+	<tr>
+		<td><%=recommendation.visit.place.name%></td>
+		<td><%=recommendation.visit.place.address%></td>
+		<td><%=recommendation.visit.user.username%></td>
+		<td><%=recommendation.visit.date%></td>
+		<td><%=recommendation.visit.rating%></td>
+		<td><%=recommendation.visit.comment%></td>
+		<td><%=recommendation.comment%></td>
+		<td>
+			<% if current_user.id == @user.id%>
+				<%= link_to 'Delete', recommendation_path(recommendation), method: :delete, data: { confirm: 'Are you sure?' }%>
+		    <% end %>
+		    <%= link_to 'Show', recommendation_path(recommendation) %>
+		</td>
+	</tr>
+<% end %>
+
+<table>

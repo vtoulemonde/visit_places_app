@@ -1,6 +1,6 @@
 class VisitsController < ApplicationController
 	def index
-		@visits = Visit.where(user_id: session[:current_user_id]).order('date DESC')
+		@visits = Visit.where(user_id: params[:user_id]).order('date DESC')
 		respond_to do |format|
 			format.html{}
 			format.json{render json: @visits.to_json(:include =>[:place])}
@@ -20,7 +20,7 @@ class VisitsController < ApplicationController
 
 		if @visit.save
 			flash[:success] = "Your visit has been created."
-			redirect_to visits_path
+			redirect_to user_visits_path(current_user)
 		else
 			flash[:error] = "Error: Your visit has not been created."
 			render place_path(@place)
@@ -45,7 +45,7 @@ class VisitsController < ApplicationController
 		@visit = Visit.find(params[:id])
 		@visit.destroy
 		flash[:success] = "Your visit has been deleted."
-		redirect_to visits_path
+		redirect_to user_visits_path(current_user)
 	end
 
 	private

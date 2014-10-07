@@ -5,6 +5,8 @@
     <li>
       <%=h friendship.friend.username %>
        <%= link_to "Delete", friendship, :method => :delete %>
+       <%= link_to 'See his/her recommendations', user_recommendations_path(friendship.friend)%>
+       <%= link_to 'See his/her visits', user_visits_path(friendship.friend)%>
     </li>
   <% end %>
 </ul>

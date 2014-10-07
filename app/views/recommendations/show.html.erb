@@ -1,0 +1,14 @@
+<h1>One recommendation for <%=@recommendation.user.username%></h1>
+
+<h3>Place</h3>
+<p><%=@recommendation.visit.place.name%></p>
+<p><%=@recommendation.visit.place.address%></p>
+<h3>Visit</h3>
+<p><%=@recommendation.visit.user.username%></p>
+<p><%=@recommendation.visit.date%></p>
+<p><%=@recommendation.visit.rating%></p>
+<p><%=@recommendation.visit.comment%></p>
+<h3>Recommendation</h3>
+<p><%=@recommendation.comment%></p>
+
+<%=link_to 'Back', user_recommendations_path(@recommendation.user) %>
