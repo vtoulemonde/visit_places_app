@@ -21,8 +21,7 @@
       <%= link_to 'My friends', friendships_path%> / 
     	<%= link_to "Find Friends", users_path %> / 
       <%= link_to "Edit Profile", edit_user_path(current_user) %> /
-    	<%= link_to 'Logout', sessions_path, method: :delete %><br />
-    	Admin actions:    <%= link_to 'All places', places_path%> / <%= link_to 'All visits', visits_all_path%>
+    	<%= link_to 'Logout', sessions_path, method: :delete %>
     <%end%>
 
 <% flash.each do |name, msg| %>

@@ -8,11 +8,6 @@ class VisitsController < ApplicationController
 		end
 	end
 
-	def all
-		@visits = Visit.all
-		render :index
-	end
-
 	def create
 		@place = Place.find(params[:place_id])
 		@visit = Visit.new visit_params

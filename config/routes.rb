@@ -4,13 +4,12 @@ Rails.application.routes.draw do
 
   	get 'search' =>'places#search'
   	get 'search_result' =>'places#search_result'
-  	get 'visits/all' => 'visits#all'
 
   	resources :visits, only: :destroy do
   		resources :recommendations, only: [:create, :new]
   	end
 
-  	resources :places do
+  	resources :places, except: :index do
     	resources :visits, except: :index
 	end
 
