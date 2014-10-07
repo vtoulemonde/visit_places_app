@@ -1,0 +1,29 @@
+<h1>Edit User Profile</h1>
+
+<%= form_for @user do |f| %>
+
+    <p>
+        <%= f.label :username %><br>
+        <%= f.text_field :username %>
+    </p>
+
+    <p>
+        <%= f.label :password %><br>
+        <%= f.password_field :password %>
+    </p>
+
+    <p>
+        <%= f.label :password_confirmation %><br>
+        <%= f.password_field :password_confirmation %>
+    </p>
+
+    <p>
+        <%= f.label :picture %><br>
+        <%= f.file_field :picture %>
+    </p>
+
+    <p>
+        <%= f.submit %>
+    </p>
+
+<% end %>
