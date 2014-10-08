@@ -1,5 +1,5 @@
 <div class="well">
-		<%= image_tag(place.picture_url, height: 130, class: "img-rounded pull-right") if place.picture.present? %>
+	<%= image_tag(place.picture_url, height: 130, class: "img-rounded pull-right") if place.picture.present? %>
 	<p><strong>Place name: </strong><%=place.name%></p>
 	<p><strong>Address: </strong><%=place.address%></p>
 	<p><strong>Type: </strong><%=place.gender%></p>

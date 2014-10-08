@@ -26,11 +26,11 @@ class PlacesController < ApplicationController
 			@place = @places[0]
 			@visit = Visit.new
 			render :show
-		elsif @places.empty? && @data.count == 1
+		elsif (@places.empty? && @data.length == 1)
 			# If one result from Google API, prefill data to create new place
 			flash[:info] = "Here is a proposition for your place. Feel free to modify the information."
   			@place = Place.new
-  			@place.name = search
+  			@place.name = @search
   			@place.address = @data[0]['formatted_address']
   			@place.lat = @data[0]['geometry']['location']['lat']
   			@place.lng = @data[0]['geometry']['location']['lng']
@@ -92,8 +92,11 @@ class PlacesController < ApplicationController
 		params.require(:place).permit(:name, :address, :gender, :price, :lat, :lng, :picture)
 	end
 
-	def search_geocoding(search)
-		address = search.gsub(' ','%20')
+	def search_geocoding(criteria)
+		if criteria == ''
+			return []
+		end
+		address = criteria.gsub(' ','%20')
 		data = Typhoeus.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyBMjQW_pHVa_SJleQQX2BC51pJ4UyhVbK0")
 		# puts data
 		data = JSON.parse(data.body)
