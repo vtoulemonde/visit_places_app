@@ -4,6 +4,26 @@
 	<% end %>
 	<h4><%=visit.user.username%>'s visit</h4>
 	<p><strong>Date: </strong><%=visit.date%></p>
-	<p><strong>Rating: </strong><%=visit.rating%></p>
+	<p>
+		<input type='hidden' id='visit_rating' value='<%=visit.rating%>'>
+		<div>
+	      <span id="rate_0" data-score="1">☆</span>
+	      <span id="rate_1" data-score="2">☆</span>
+	      <span id="rate_2" data-score="3">☆</span>
+	      <span id="rate_3" data-score="4">☆</span>
+	      <span id="rate_4" data-score="5">☆</span>
+	    </div>
+	</p>
 	<p><strong>Comment: </strong><%=visit.comment%></p>
 </div>
+
+<script type="text/javascript">
+
+
+  if ($('#visit_rating').val() > 0){
+    for (var i =0; i< $('#visit_rating').val(); i++){
+      $('#rate_'+i).addClass('on');
+    }
+  }
+
+</script>

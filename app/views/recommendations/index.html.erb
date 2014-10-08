@@ -13,15 +13,25 @@
 			        <p>Recommended by <%=recommendation.visit.user.username%>: </p>
 			        <p><%=recommendation.comment%></p>
 			        <p>Visited the <%=recommendation.visit.date%></p>
-			        <p>Rated: <%=recommendation.visit.rating%></p>
+			        <p>
+			        	<div>
+			        		<% for i in (1..5)%>
+			        			<% if i <= recommendation.visit.rating %>
+			        				<span class='on'>☆</span>
+			        			<% else %>
+			        				<span>☆</span>
+			        			<% end%>
+			        		<% end %>
+					    </div>
+			        </p>
 			        <p><%=recommendation.visit.comment%></p>
 			        
 			        <p>
+			        	<%= link_to 'Detail', recommendation_path(recommendation), class:"btn btn-default" %>
 			        	<% if current_user.id == @user.id%>
 							<%= link_to '', recommendation_path(recommendation), 
 									method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-default glyphicon glyphicon-remove"%>
 					    <% end %>
-					    <%= link_to 'See', recommendation_path(recommendation), class:"btn btn-default" %>
 			        </p>
 			      </div>
 			    </div>
