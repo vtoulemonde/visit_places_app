@@ -22,3 +22,13 @@
 		</tr>
 	<% end %>
 </table>
+
+<h2>Your current friends</h2>
+<table class="table table-striped">
+	<% @fs.each do |friend|%>
+		<tr>
+			<td><%= image_tag(friend.picture_url, :width => 50, class: "img-circle") if friend.picture.present? %></td>
+			<td><%=friend.username%></td>
+		</tr>
+	<% end %>
+</table>
