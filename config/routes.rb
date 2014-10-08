@@ -23,7 +23,4 @@ Rails.application.routes.draw do
   post 'sessions' => 'sessions#create'
   delete 'sessions' => 'sessions#destroy'
 
-  get 'visits/:id/addphoto' => 'visits#addphoto', as: "addphoto"
-  patch 'visits/:id/createphoto' => 'visits#createphoto', as: "createphoto"
-
 end

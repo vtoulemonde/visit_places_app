@@ -9,3 +9,16 @@
 }
 
 #map-canvas { height: 300px; width: 300px; margin: 0; padding: 0;}
+
+.rating > span:hover:before {
+   content: "\2605";
+   position: absolute;
+}
+
+.rating {
+	color: gray;
+}
+
+.on {
+	color: orange;
+}
