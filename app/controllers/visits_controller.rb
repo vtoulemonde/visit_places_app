@@ -27,6 +27,11 @@ class VisitsController < ApplicationController
 		end
 	end
 
+	def show
+		@visit = Visit.find(params[:id])
+		@place = @visit.place
+	end
+
 	def edit
 		@visit = Visit.find(params[:id])
 		@place = @visit.place
@@ -36,6 +41,10 @@ class VisitsController < ApplicationController
 		@visit = Visit.find(params[:id])
 
 		if @visit.update(visit_params)
+			@photo = Photo.new
+			@photo.picture = params[:visit][:picture]
+			@photo.visit_id = @visit.id
+			@photo.save
 			redirect_to user_visits_path(current_user)
 		else
 			render :edit

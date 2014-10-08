@@ -1,4 +1,7 @@
 <div class="well">
+	<% visit.photos.each do |p| %>
+		<%= image_tag(p.picture_url, height: 130, class: "img-rounded pull-right")%>
+	<% end %>
 	<h4><%=visit.user.username%>'s visit</h4>
 	<p><strong>Date: </strong><%=visit.date%></p>
 	<p><strong>Rating: </strong><%=visit.rating%></p>
