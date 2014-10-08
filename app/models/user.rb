@@ -20,4 +20,13 @@ class User < ActiveRecord::Base
 		friends
 	end
 
+	def is_my_friend?(my_friend)
+		friendships.each do |friendship|
+			if friendship.friend_id == my_friend.id
+				return true
+			end
+		end
+		return false
+	end
+
 end

@@ -15,26 +15,13 @@ class UsersController < ApplicationController
 
     def index
         @users = []
-        @fs = current_user.friends
-        @notfriends = []
         if params[:search] == ''
             @users = User.all
         elsif !params[:search].nil?
             search = params[:search].downcase
-            allusers = User.where("lower(username) like ?", "%#{search}%")
-            @users = []
-            allusers.each do |user|
-                if user != current_user
-                    @users << user
-                end
-
-                @fs.each do |friend|
-                    if friend != user
-                        @notfriends << user
-                    end
-                end
-            end
+            @users = User.where("lower(username) like ?", "%#{search}%")
         end
+
         render :index
     end
 
