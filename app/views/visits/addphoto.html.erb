@@ -1,0 +1,12 @@
+
+<%= form_for @visit, url: createphoto_path(@visit) do |f| %>
+  <div>
+    <%= f.label :picture %><br>
+    <%= f.file_field :picture %>
+  </div>
+  <div >
+      <%= f.submit %>
+      <%= link_to 'Back', user_visits_path(current_user) %>
+  </div>
+<% end %>
+
