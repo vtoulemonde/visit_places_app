@@ -7,16 +7,19 @@
 		<% @visits.each do |visit|%>
 			  <div class="col-sm-6 col-md-4">
 			    <div class="thumbnail">
-			    	<%= image_tag(visit.place.picture_url) if visit.place.picture.present? %>
-			    	<!--<% visit.photos.each do |p| %>
-						<%= image_tag(p.picture_url, :width => 300)%>
-					<% end %>-->
+			    	
+			    	<% if !visit.photos.empty? %>
+			    		<%= image_tag(visit.photos.first.picture_url) %>
+			    	<% elsif visit.place.picture.present? %>
+			    		<%= image_tag(visit.place.picture_url) %>
+			    	<% end %>
 			      <div class="caption">
 			        <h3><%=visit.place.name%></h3>
 			        <p><%=visit.date%></p>
 			        <p><%=visit.rating%></p>
 			        <p><%=visit.comment%></p>
 			        <p>
+			        	<%= link_to "", place_visit_path(visit.place, visit), class:"btn btn-default glyphicon glyphicon-eye-open"%>
 			        	<%= link_to "", edit_place_visit_path(visit.place, visit), class:"btn btn-default glyphicon glyphicon-pencil"%>
 						<%= link_to '', place_visit_path(visit.place, visit),
 					                    method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-default glyphicon glyphicon-trash"%>
