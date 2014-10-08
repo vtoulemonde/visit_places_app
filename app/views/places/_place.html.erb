@@ -1,0 +1,9 @@
+<div class="well">
+		<%= image_tag(place.picture_url, height: 130, class: "img-rounded pull-right") if place.picture.present? %>
+	<p><strong>Place name: </strong><%=place.name%></p>
+	<p><strong>Address: </strong><%=place.address%></p>
+	<p><strong>Type: </strong><%=place.gender%></p>
+	<p><strong>Price: </strong><%=place.price%></p>
+	<input type='hidden' id='place_lat' value="<%=place.lat%>">
+	<input type='hidden' id='place_lng' value="<%=place.lng%>">
+</div>

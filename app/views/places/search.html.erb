@@ -1,34 +1,54 @@
+
+
 <!-- Search form -->
+<br><br>
 <%= form_tag search_result_path, method: :GET do %>
-    <div >
+<div class="input-group">
     <%= text_field_tag :search, @search, class: "form-control" %>
-    </div>
-    <%= submit_tag "Search", class: "btn btn-primary"%>
+    <span class="input-group-btn">
+    	<%= submit_tag "Search", class: "btn btn-default"%>
+    </span>
+</div>
 <% end %>
 
+<br>
+
+<%= link_to 'Create a new place', new_place_path, class: "btn btn-primary"%><br />
+
 <!-- Result of search in database -->
-<h2>Existing places</h2>
-<% @places.each do |place|%>
-	<p>
-		<%=place.name%> | <%= image_tag(place.picture_url, :width => 300) if place.picture.present? %> | <%=place.address%> | <%=place.gender%>
-		<%= link_to "Choose", place_path(place)%>
-	</p>
+<% if !@places.empty?%>
+	<h2>Existing places</h2>
+	<% @places.each do |place|%>
+	<div class="media">
+	  <a class="pull-left" href="#">
+	  	<%= image_tag(place.picture_url, :width => 100, class: "media-object img-thumbnail") if place.picture.present? %>
+	  </a>
+	  <div class="media-body">
+	    <h4 class="media-heading"><%=place.name%></h4>
+	    <%=place.address%> - <%=place.gender%>
+	    <%= link_to "Choose", place_path(place), class: "btn btn-primary"%>
+	  </div>
+	</div>
+	<% end %>
 <% end %>
 
 <!-- Result of search with Google Map API -->
-<h2>Suggesting places by Google Maps</h2>
-<% @data.each do |info|%>
-	<p>
-		<%= form_tag new_place_path, method: :GET do %>
-			
-			<%=info['formatted_address']%>
-			<%= hidden_field_tag :name, @search%>
-			<%= hidden_field_tag :address, info['formatted_address']%>
-			<%= hidden_field_tag :lat, info['geometry']['location']['lat']%>
-			<%= hidden_field_tag :lng, info['geometry']['location']['lng']%>
-			<%= submit_tag "Choose"%>
-		<% end %>
-	</p>
+<% if !@data.empty?%>
+	<h2>Suggesting places by Google Maps</h2>
+	<% @data.each do |info|%>
+		<div class="media-body">
+			<%= form_tag new_place_path, method: :GET do %>
+				
+				<h4 class="media-heading"><%=info['formatted_address']%></h4>
+				<%= hidden_field_tag :name, @search%>
+				<%= hidden_field_tag :address, info['formatted_address']%>
+				<%= hidden_field_tag :lat, info['geometry']['location']['lat']%>
+				<%= hidden_field_tag :lng, info['geometry']['location']['lng']%>
+				<%= submit_tag "Choose", class: "btn btn-primary"%>
+			<% end %>
+		</div>
+	<% end %>
 <% end %>
 
-<%= link_to 'Create a new place', new_place_path%><br />
+<br>
+

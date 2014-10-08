@@ -1,0 +1,13 @@
+
+<h2>All places</h2>
+
+<% @places.each do |place|%>
+	<p>
+		<%=place.name%> | <%= image_tag(place.picture_url, :width => 300) if place.picture.present? %> | <%=place.address%> | <%=place.gender%> | <%=place.price%> | <%=place.lat%> | <%=place.lng%>
+		<%= link_to "Edit", edit_place_path(place)%>
+		<%= link_to 'Delete', place_path(place),
+	                    method: :delete, data: { confirm: 'Are you sure?' }%>
+	</p>
+<% end %>
+
+<%= link_to 'Create a new place', new_place_path%>
