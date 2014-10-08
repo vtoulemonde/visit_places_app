@@ -1,19 +1,5 @@
 <h1>New visit</h1>
-<div class="row">
 
-  	<div class="col-md-8">
+<%= render partial: "place", object: @place, as: 'place' %>
 
-		<%= render partial: "place", object: @place, as: 'place' %>
-		<%= render 'visits/form' %>
-
-	</div>
-
-  <div class="col-md-4">
-    <div id="map-canvas" data-map="disable"></div>
-  </div>
-
-</div>
-
-<script type="text/javascript">
-google.maps.event.addDomListener(window, 'load', initialize);
-</script>
+<%= render 'visits/form' %>

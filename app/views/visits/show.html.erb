@@ -1,19 +1,11 @@
 <h1>Visit</h1>
-<div class="row">
 
-  	<div class="col-md-8">
-		<%= render partial: "places/place", object: @place, as: 'place' %>
-		<%= render partial: "visit", object: @visit, as: 'visit' %>
+<%= render partial: "places/place", object: @place, as: 'place' %>
 
-      	<%= link_to 'Edit', edit_place_visit_path(@place, @visit) , class:"btn btn-default"%>
-      	<%= link_to 'Back', user_visits_path(current_user) , class:"btn btn-default"%>
-  	</div>
+<%= render partial: "visit", object: @visit, as: 'visit' %>
 
-	<div class="col-md-4">
-	    <div id="map-canvas" data-map="disable"></div>
-	</div>
-
-</div>
+<%= link_to 'Edit', edit_place_visit_path(@place, @visit) , class:"btn btn-default"%>
+<%= link_to 'Back', user_visits_path(current_user) , class:"btn btn-default"%>
 
 <script type="text/javascript">
 google.maps.event.addDomListener(window, 'load', initialize);
