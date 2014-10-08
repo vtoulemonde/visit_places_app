@@ -1,19 +1,26 @@
-<h2>Friendships</h2>
+<h2>Following</h2>
 
-<ul>
-  <% for friendship in current_user.friendships %>
-    <li>
-      <%=h friendship.friend.username %>
-       <%= link_to "Delete", friendship, :method => :delete %>
-       <%= link_to 'See his/her recommendations', user_recommendations_path(friendship.friend)%>
-       <%= link_to 'See his/her visits', user_visits_path(friendship.friend)%>
-    </li>
+<table class="table table-striped">
+  <% current_user.friendships.each do |friendship|%>
+    <tr>
+      <td><%= image_tag(friendship.friend.picture_url, :width => 50, class: "img-circle") if friendship.friend.picture.present? %></td>
+      <td><%= friendship.friend.username%></td>
+      <td>
+        <%= link_to "Delete", friendship, :method => :delete, class: "btn btn-default" %>
+        <%= link_to 'See Recommendations', user_recommendations_path(friendship.friend), class: "btn btn-default"%>
+        <%= link_to 'See Visits', user_visits_path(friendship.friend), class: "btn btn-default"%>
+      </td>
+    </tr>
   <% end %>
-</ul>
+</table>
 
-<h2>Friended by Users</h2>
-<ul>
-  <% for user in current_user.inverse_friends %>
-    <li><%=h user.username %></li>
+<h2>Followers</h2>
+
+<table class="table table-striped">
+  <% current_user.inverse_friends.each do |user|%>
+    <tr>
+      <td><%= image_tag(user.picture_url, :width => 50, class: "img-circle") if user.picture.present? %></td>
+      <td><%= user.username%></td>
+    </tr>
   <% end %>
-</ul>
+</table>
