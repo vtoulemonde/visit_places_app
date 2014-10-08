@@ -1,3 +1,4 @@
+<div class="border_box">
 <% if @visit.errors.any? %>
   <% @visit.errors.full_messages.each do |msg| %>
     <p><%= msg %></p>
@@ -5,20 +6,22 @@
 <% end %>
 
 <%= form_for [@place, @visit] do |f| %>
-  <div>
+  
+  <div class="form-group">
     <%= f.label :date %>
-    <%= f.date_field :date %>
+    <%= f.date_field :date, class: "form-control" %>
   </div>
-  <div>
+  <div class="form-group">
     <%= f.label :rating %>
-    <%= f.text_field :rating %>
+    <%= f.text_field :rating, class: "form-control" %>
   </div>
-  <div>
+  <div class="form-group">
     <%= f.label :comment %>
-    <%= f.text_area :comment %>
+    <%= f.text_area :comment, class: "form-control" %>
   </div>
   <div >
-      <%= f.submit %>
-      <%= link_to 'Back', user_visits_path(current_user) %>
+      <%= f.submit class:"btn btn-default"%>
+      <%= link_to 'Back', user_visits_path(current_user) , class:"btn btn-default"%>
   </div>
 <% end %>
+</div>

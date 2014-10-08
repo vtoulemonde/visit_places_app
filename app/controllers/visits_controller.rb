@@ -18,7 +18,7 @@ class VisitsController < ApplicationController
 			flash[:success] = "Your visit has been created."
 			redirect_to user_visits_path(current_user)
 		else
-			flash[:error] = "Error: Your visit has not been created."
+			flash[:danger] = "Error: Your visit has not been created."
 			render place_path(@place)
 		end
 	end

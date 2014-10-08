@@ -4,7 +4,7 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
 
         if @user.save
-            flash[:notice] = "Your account has been created! Please login."
+            flash[:success] = "Your account has been created! Please login."
             redirect_to root_path
         else
             render "welcome/index"
@@ -13,9 +13,9 @@ class UsersController < ApplicationController
 
     def index
         @users = []
-        if (params[:search] == 'all')
+        if (params[:search] == '')
             @users = User.all
-        elsif (params[:search] !='')
+        else
             @users = User.where(username: params[:search])
         end
         render :index

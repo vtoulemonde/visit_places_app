@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-
-	resources 'friendships'
+    
+    resources 'friendships'
 
   	get 'search' =>'places#search'
   	get 'search_result' =>'places#search_result'
@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   		resources :recommendations, only: [:create, :new]
   	end
 
-  	resources :places, except: :index do
+  	resources :places do
     	resources :visits, except: :index
 	  end
 

@@ -1,14 +1,24 @@
 <h1>Add friend</h1>
 
+<!-- Search form -->
 <%= form_tag users_path, method: :GET do %>
-    <div >
-    <%= text_field_tag :search, nil, class: "form-control" %>
+	<div class="input-group">
+	    <%= text_field_tag :search, nil, class: "form-control" %>
+	    <span class="input-group-btn">
+	    	<%= submit_tag "Search", class: "btn btn-default"%>
+	    </span>
+
     </div>
-    <%= submit_tag "Search", class: "btn btn-primary"%>
 <% end %>
 
-<ul>
-<% @users.each do |user|%>
-	<li><%=user.username%> <%= link_to "Add Friend", friendships_path(:friend_id => user.id), :method => :post %></li>
-<% end %>
-</ul>
+<br><br>
+
+<table class="table table-striped">
+	<% @users.each do |user|%>
+		<tr>
+			<td><%= image_tag(user.picture_url, :width => 50, class: "img-circle") if user.picture.present? %></td>
+			<td><%=user.username%></td>
+			<td><%= link_to "Add Friend", friendships_path(:friend_id => user.id), :method => :post , class: "btn btn-default" %></td>
+		</tr>
+	<% end %>
+</table>

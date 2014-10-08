@@ -1,4 +1,4 @@
-<h1>Recommendations#new</h1>
+<h1>New recommendations</h1>
 
 
 <% if @recommendation.errors.any? %>
@@ -6,23 +6,37 @@
     <p><%= msg %></p>
   <% end %>
 <% end %>
-<%= @visit.place.name %>
-<%= @visit.place.address %>
-<%= @visit.date %>
-<%= @visit.rating %>
-<%= @visit.comment %>
 
-<%= form_for [@visit, @recommendation] do |f| %>
-	<div>
-  		<%= f.collection_select :user_id, current_user.get_friends, :id, :username %>
-  	</div>
-  	<div>
-    	<%= f.label :comment %>
-    	<%= f.text_area :comment %>
-  	</div>
+<div class="row">
+
+    <div class="col-md-8">
+
+      <%= render partial: "places/place", object: @visit.place, as: 'place' %>
+      <%= render partial: "visits/visit", object: @visit, as: 'visit' %>
+      <div class="border_box">
+      <%= form_for [@visit, @recommendation] do |f| %>
+        <div class="form-group">
+            <%= f.label :user_id, "Recommendation to send to" %>
+            <%= f.collection_select :user_id, current_user.get_friends, :id, :username , class: "form-control"%>
+          </div>
+          <div class="form-group">
+            <%= f.label :comment %>
+            <%= f.text_area :comment , class: "form-control"%>
+          </div>
+          <div class="form-group">
+            <%= f.submit class:"btn btn-default"%>
+            <%= link_to 'Cancel', user_visits_path(current_user), class:"btn btn-default" %>
+          </div>
+      <% end %>
+    </div>
+    </div>
+
+    <div class="col-md-4">
+      <div id="map-canvas" data-map="disable"></div>
+    </div>
   
-  	<div>
-    	<%= f.submit%>
-    	<%= link_to 'Cancel', user_visits_path(current_user) %>
-  	</div>
-<% end %>
+</div>
+
+<script type="text/javascript">
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
