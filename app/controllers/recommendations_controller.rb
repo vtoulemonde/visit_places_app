@@ -1,4 +1,5 @@
 class RecommendationsController < ApplicationController
+  include RecommendationsHelper
   def index
   	@recommendations = Recommendation.where(user_id: params[:user_id])
   	@user = User.find(params[:user_id])
@@ -11,8 +12,11 @@ class RecommendationsController < ApplicationController
 
   def create
   	@visit = Visit.find(params[:visit_id])
-  	@recommendation = @visit.recommendations.create recommendation_params
-  	if @recommendation.valid?
+  	@recommendation = @visit.recommendations.create(recommendation_params)
+  	@current_user = @visit.user
+    @friend = User.find(@recommendation.user_id)
+    if @recommendation.valid?
+      sendRecommendation(@friend.email, @current_user.username, @visit.place.name, @recommendation.comment)
 			redirect_to user_visits_path(current_user)
 		else
 			render :new
