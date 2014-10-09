@@ -1,8 +1,13 @@
 class RecommendationsController < ApplicationController
   include RecommendationsHelper
+
   def index
   	@recommendations = Recommendation.where(user_id: params[:user_id])
   	@user = User.find(params[:user_id])
+    respond_to do |format|
+      format.html{}
+      format.json{render json: @recommendations.to_json(:include => {:visit => {:include => :place}})}
+    end
   end
 
   def new
@@ -27,9 +32,9 @@ class RecommendationsController < ApplicationController
   	recommendation = Recommendation.find(params[:id])
     if recommendation.destroy
         render json: {}
-      else
+    else
         render status: 400, nothing: true
-      end
+    end
   end
 
   def show

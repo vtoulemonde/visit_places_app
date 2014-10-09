@@ -59,3 +59,7 @@
 .visit{
 	height: 200px;
 }
+
+.small-img {
+	max-height: 180px;
+}

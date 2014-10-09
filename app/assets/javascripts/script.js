@@ -2,7 +2,6 @@ function initialize() {
 
   	var place_lat = parseFloat($('#place_lat').val());
   	var place_lng = parseFloat($('#place_lng').val());
-    console.log(place_lat +' '+place_lng)
 
   	// Create the map center on the location or on SF by default
   	if (place_lat && place_lng){
@@ -63,7 +62,6 @@ function initialize() {
     	  	});
 
     	  	request.done(function(data){
-            console.log('here')
     	  		if(data.results.length == 0){
     	  			alert("INVALID ADDRESS")
     	  		} else {
@@ -106,7 +104,42 @@ function initializeVisitsMap(){
     });
 
     function createPin(myLatlng, title){
-      var marker = new google.maps.Marker({
+      new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: title
+      });
+    }
+}
+
+function initializeRecommendationsMap(){
+  var mapOptions = {
+      center: { lat: 37.7597727, lng: -122.427063},
+      zoom: 12
+    };
+
+    var map = new google.maps.Map(document.getElementById('map-canvas'),
+        mapOptions);
+
+      var request = $.ajax({
+        url: "/users/"+$('#user_id').val()+"/recommendations",
+        type: "GET",
+        dataType: "json"
+      });
+
+    request.done(function(data){
+      var latlngbounds = new google.maps.LatLngBounds( );
+      for(var i = 0; i < data.length; i++){
+        var myLatlng = new google.maps.LatLng(data[i].visit.place.lat, data[i].visit.place.lng);
+        createPin(myLatlng, data[i].visit.place.name);
+        latlngbounds.extend(myLatlng);
+      }
+      //Recenter and resize the map
+      map.fitBounds( latlngbounds );
+    });
+
+    function createPin(myLatlng, title){
+      new google.maps.Marker({
         position: myLatlng,
         map: map,
         title: title

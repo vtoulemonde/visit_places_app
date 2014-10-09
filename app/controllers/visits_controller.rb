@@ -4,7 +4,7 @@ class VisitsController < ApplicationController
 		@user = User.find(params[:user_id])
 		respond_to do |format|
 			format.html{}
-			format.json{render json: @visits.to_json(:include =>[:place])}
+			format.json{render json: @visits.to_json(:include =>:place)}
 		end
 	end
 
