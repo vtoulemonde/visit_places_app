@@ -13,7 +13,7 @@
 
 <br>
 
-<%= link_to 'Create a new place', new_place_path, class: "btn btn-primary"%><br />
+<%= link_to 'Create a new place', new_place_path, class: "btn btn-default"%><br />
 
 <!-- Result of search in database -->
 <% if !@places.empty?%>
@@ -26,7 +26,7 @@
 	  <div class="media-body">
 	    <h4 class="media-heading"><%=place.name%></h4>
 	    <%=place.address%> - <%=place.gender%>
-	    <%= link_to "Choose", new_place_visit_path(place), class: "btn btn-primary"%>
+	    <%= link_to "Choose", new_place_visit_path(place), class: "btn btn-default"%>
 	  </div>
 	</div>
 	<% end %>
@@ -44,7 +44,7 @@
 				<%= hidden_field_tag :address, info['formatted_address']%>
 				<%= hidden_field_tag :lat, info['geometry']['location']['lat']%>
 				<%= hidden_field_tag :lng, info['geometry']['location']['lng']%>
-				<%= submit_tag "Choose", class: "btn btn-primary"%>
+				<%= submit_tag "Choose", class: "btn btn-default"%>
 			<% end %>
 		</div>
 	<% end %>

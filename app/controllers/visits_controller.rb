@@ -11,6 +11,7 @@ class VisitsController < ApplicationController
 	def new
 		@place = Place.find(params[:place_id])
 		@visit = Visit.new
+		@visit.rating = 0
 	end
 
 	def create
@@ -22,21 +23,13 @@ class VisitsController < ApplicationController
 		if @visit.save
 			flash[:success] = "Your visit has been created."
 	        if params[:visit][:pictures]
-	          params[:visit][:pictures].each { |picture|
-	            @visit.photos.create(picture: picture)
-	          }
+	          	params[:visit][:pictures].each { |picture|
+	            	@visit.photos.create(picture: picture)
+	          	}	
 	      	end
-
-			# if (params[:visit][:picture])
-			# 	@photo = Photo.new
-			# 	@photo.picture = params[:visit][:picture]
-			# 	@photo.visit_id = @visit.id
-			# 	@photo.save
-			# end
 			redirect_to user_visits_path(current_user)
 		else
-			flash[:danger] = "Error: Your visit has not been created."
-			render place_path(@place)
+			render :new
 		end
 	end
 
@@ -55,19 +48,13 @@ class VisitsController < ApplicationController
 
 		if @visit.update(visit_params)
 	        if params[:visit][:pictures]
-	          params[:visit][:pictures].each { |picture|
-	            @visit.photos.create(picture: picture)
-	          }
+	        	params[:visit][:pictures].each { |picture|
+	            	@visit.photos.create(picture: picture)
+	          	}
 	      	end
-
-			# if (params[:visit][:picture])
-			# 	@photo = Photo.new
-			# 	@photo.picture = params[:visit][:picture]
-			# 	@photo.visit_id = @visit.id
-			# 	@photo.save
-			# end
 			redirect_to user_visits_path(current_user)
 		else
+			@place = Place.find(params[:place_id])
 			render :edit
 		end
 	end

@@ -8,4 +8,4 @@
 <%= render partial: "places/place", object: @recommendation.visit.place, as: 'place' %>
 <%= render partial: "visits/visit", object: @recommendation.visit, as: 'visit' %>
 
-<%=link_to 'Back', user_recommendations_path(@recommendation.user), class:"btn btn-primary" %>
+<%=link_to 'Back', user_recommendations_path(@recommendation.user), class:"btn btn-default" %>

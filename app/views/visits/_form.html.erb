@@ -2,10 +2,8 @@
     <div class="col-md-7">
 
       <div class="border_box">
-        <% if @visit.errors.any? %>
-          <% @visit.errors.full_messages.each do |msg| %>
-            <p><%= msg %></p>
-          <% end %>
+        <% if @visit %>
+            <%= render partial: "shared/form_error_list", locals: { model: @visit } %>
         <% end %>
 
         <%= form_for [@place, @visit] do |f| %>
@@ -42,15 +40,15 @@
       </div>
   </div>
   <div class="col-md-5">
+    <% if !@visit.photos.empty?%>
     <div class="border_box">
-      <% if !@visit.photos.empty?%>
         <p>
           <% @visit.photos.each do |p| %>
             <%= image_tag(p.picture_url, height: 130, class: "img-rounded")%>
           <% end %>
         </p>
-      <% end %>
-  </div>
+    </div>
+    <% end %>
 </div>
 
 <script type="text/javascript">

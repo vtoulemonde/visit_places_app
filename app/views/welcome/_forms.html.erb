@@ -1,16 +1,13 @@
-<br>
+<% if @user %>
+    <%= render partial: "shared/form_error_list", locals: { model: @user } %>
+<% end %>
+
 <div class="row">
     <div class="col-md-5 border_box">
 
         <h1>Registration</h1>
 
         <%= form_for User.new do |f| %>
-
-            <% if @user %>
-
-                <%= render partial: "shared/form_error_list", locals: { model: @user } %>
-
-            <% end %>
 
             <div class="form-group">
                 <%= f.label :username %><br>
@@ -33,7 +30,7 @@
             </div>
 
             <div class="form-group">
-                <%= f.submit class:"btn btn-primary" %>
+                <%= f.submit class:"btn btn-default" %>
             </div>
 
         <% end %>
@@ -55,9 +52,10 @@
                 <%= password_field_tag :password,"", class: "form-control" %>
             </div>
             <div class="form-group">
-                <%= submit_tag "Login", class:"btn btn-primary" %>
+                <%= submit_tag "Login", class:"btn btn-default" %>
             </div> 
 
         <% end %>
     </div>
     <div class="col-md-1"></div>
+</div>

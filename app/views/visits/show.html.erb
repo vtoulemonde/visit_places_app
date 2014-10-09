@@ -4,8 +4,11 @@
 
 <%= render partial: "visit", object: @visit, as: 'visit' %>
 
-<%= link_to 'Edit', edit_place_visit_path(@place, @visit) , class:"btn btn-default"%>
-<%= link_to 'Back', user_visits_path(current_user) , class:"btn btn-default"%>
+<% if current_user.id == @visit.user.id %>
+	<%= link_to ' Edit', edit_place_visit_path(@place, @visit) , class:"btn btn-default glyphicon glyphicon-pencil"%>
+	<%= link_to " Recommend", new_visit_recommendation_path(@visit), class:"btn btn-default glyphicon glyphicon-share"%>
+<% end %>
+<%= link_to 'Back', user_visits_path(@visit.user) , class:"btn btn-default"%>
 
 <script type="text/javascript">
 google.maps.event.addDomListener(window, 'load', initialize);
