@@ -21,12 +21,18 @@ class VisitsController < ApplicationController
 
 		if @visit.save
 			flash[:success] = "Your visit has been created."
-			if (params[:visit][:picture])
-				@photo = Photo.new
-				@photo.picture = params[:visit][:picture]
-				@photo.visit_id = @visit.id
-				@photo.save
-			end
+	        if params[:visit][:pictures]
+	          params[:visit][:pictures].each { |picture|
+	            @visit.photos.create(picture: picture)
+	          }
+	      	end
+
+			# if (params[:visit][:picture])
+			# 	@photo = Photo.new
+			# 	@photo.picture = params[:visit][:picture]
+			# 	@photo.visit_id = @visit.id
+			# 	@photo.save
+			# end
 			redirect_to user_visits_path(current_user)
 		else
 			flash[:danger] = "Error: Your visit has not been created."
@@ -48,12 +54,18 @@ class VisitsController < ApplicationController
 		@visit = Visit.find(params[:id])
 
 		if @visit.update(visit_params)
-			if (params[:visit][:picture])
-				@photo = Photo.new
-				@photo.picture = params[:visit][:picture]
-				@photo.visit_id = @visit.id
-				@photo.save
-			end
+	        if params[:visit][:pictures]
+	          params[:visit][:pictures].each { |picture|
+	            @visit.photos.create(picture: picture)
+	          }
+	      	end
+
+			# if (params[:visit][:picture])
+			# 	@photo = Photo.new
+			# 	@photo.picture = params[:visit][:picture]
+			# 	@photo.visit_id = @visit.id
+			# 	@photo.save
+			# end
 			redirect_to user_visits_path(current_user)
 		else
 			render :edit
