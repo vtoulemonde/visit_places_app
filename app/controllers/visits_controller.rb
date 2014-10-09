@@ -11,6 +11,7 @@ class VisitsController < ApplicationController
 	def new
 		@place = Place.find(params[:place_id])
 		@visit = Visit.new
+		@visit.rating = 0
 	end
 
 	def create
@@ -28,8 +29,7 @@ class VisitsController < ApplicationController
 	      	end
 			redirect_to user_visits_path(current_user)
 		else
-			flash[:danger] = "Error: Your visit has not been created."
-			render place_path(@place)
+			render :new
 		end
 	end
 
@@ -54,6 +54,7 @@ class VisitsController < ApplicationController
 	      	end
 			redirect_to user_visits_path(current_user)
 		else
+			@place = Place.find(params[:place_id])
 			render :edit
 		end
 	end
