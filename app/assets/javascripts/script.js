@@ -198,9 +198,32 @@ function addToFavorites(e){
 
     request.done(function(data){
       $(e.target).addClass("glyphicon-heart");
-      $(e.target).css({"color" : "red"});
+      $(e.target).addClass("red");
       $(e.target).removeClass("glyphicon-heart-empty");
-      $(e.target).unbind('click');
+      $(e.target).click(removeFromFavorites);
+    });
+}
+
+// Remove from favorites
+function removeFromFavorites(e){
+
+    e.preventDefault();
+    var id = $(e.target).data("id");
+    data_hash = {place_id: id}
+
+    var request = $.ajax({
+
+      url: "/place_favorites/",
+      data: data_hash,
+      type: "DELETE", 
+      dataType: "json"
+    });
+
+    request.done(function(data){
+      $(e.target).removeClass("glyphicon-heart");
+      $(e.target).removeClass("red");
+      $(e.target).addClass("glyphicon-heart-empty");
+      $(e.target).click(addToFavorites);
     });
 }
 

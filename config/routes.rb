@@ -28,4 +28,6 @@ Rails.application.routes.draw do
 
   resources :favorites
 
+  delete 'place_favorites' =>'favorites#delete_favorite'
+
 end
