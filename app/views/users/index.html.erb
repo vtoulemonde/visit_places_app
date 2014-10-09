@@ -15,10 +15,12 @@
 
 <table class="table table-striped">
 	<% @users.each do |user|%>
+	<% if current_user.id != user.id && !current_user.is_my_friend?(user) %>
 		<tr>
 			<td><%= image_tag(user.picture_url, :width => 50, class: "img-circle") if user.picture.present? %></td>
 			<td><%=user.username%></td>
 			<td><%= link_to "Add Friend", friendships_path(:friend_id => user.id), :method => :post , class: "btn btn-default" %></td>
 		</tr>
+	<% end %>
 	<% end %>
 </table>
