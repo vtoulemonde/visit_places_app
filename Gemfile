@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'rails_12factor', group: :production
+
 gem 'carrierwave'
 
 gem 'mini_magick', '~> 3.8.1'
