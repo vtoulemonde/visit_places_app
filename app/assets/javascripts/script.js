@@ -182,3 +182,25 @@ function initializeFavoritesMap(){
     }
 }
 
+// Add place to favorites
+function addToFavorites(e){
+    e.preventDefault();
+    var id = $(e.target).data("id");
+
+    data_hash = { favorite: {place_id: id } }
+
+    var request = $.ajax({
+      url: "/favorites/",
+      type: "POST", 
+      data: data_hash,
+      dataType: "json"
+    });
+
+    request.done(function(data){
+      $(e.target).addClass("glyphicon-heart");
+      $(e.target).css({"color" : "red"});
+      $(e.target).removeClass("glyphicon-heart-empty");
+      $(e.target).unbind('click');
+    });
+}
+

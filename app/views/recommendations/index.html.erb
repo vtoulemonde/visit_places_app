@@ -33,9 +33,9 @@
 			        <p>
 			        	<%= link_to 'Detail', recommendation_path(recommendation), class:"btn btn-default" %>
 			        	<% if current_user.is_favorite?(recommendation.visit.place) %>
-			        		<span class="btn btn-default glyphicon glyphicon-ok"></span>
+			        		<span class="btn btn-default glyphicon glyphicon-heart" style= "color:red;"></span>
 			        	<% else %>
-			        		<a class="btn btn-default glyphicon glyphicon-heart" data-id="<%=recommendation.visit.place.id%>" href="#"></a>	
+			        		<a class="btn btn-default glyphicon glyphicon-heart-empty" data-id="<%=recommendation.visit.place.id%>" href="#"></a>	
 			        	<% end %>
 			        	<% if current_user.id == @user.id%>
 			        		<a class="btn btn-default glyphicon glyphicon-trash" data-id="<%=recommendation.id%>" href="#"></a>
@@ -76,24 +76,6 @@
 	});
 
 	// Add place to favorites
-	$('.glyphicon-heart').click(function(e){
-		e.preventDefault();
-		var id = $(e.target).data("id");
-
-		data_hash = { favorite: {place_id: id } }
-
-		var request = $.ajax({
-			url: "/favorites/",
-			type: "POST",	
-			data: data_hash,
-			dataType: "json"
-		});
-
-		request.done(function(data){
-			$(e.target).addClass("glyphicon-ok");
-			$(e.target).removeClass("glyphicon-heart");
-			$(e.target).unbind('click');
-		});
-	});
+	$('.glyphicon-heart-empty').click(addToFavorites;
 
 </script>
