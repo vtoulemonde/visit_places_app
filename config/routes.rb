@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 	end
 
 	resources :places do
-  	resources :visits, except: :index
+  	resources :visits, except: [:index, :destroy]
   end
 
   root 'welcome#index'
