@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
 	get 'search' =>'places#search'
 	get 'search_result' =>'places#search_result'
+  get 'about' => 'welcome#about'
 
 	resources :visits, only: :destroy do
 		resources :recommendations, only: [:create, :new]
