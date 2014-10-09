@@ -25,8 +25,11 @@ class RecommendationsController < ApplicationController
 
   def destroy
   	recommendation = Recommendation.find(params[:id])
-  	recommendation.destroy
-  	redirect_to user_recommendations_path(current_user)
+    if recommendation.destroy
+        render json: {}
+      else
+        render status: 400, nothing: true
+      end
   end
 
   def show

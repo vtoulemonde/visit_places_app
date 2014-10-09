@@ -2,7 +2,7 @@ class FriendshipsController < ApplicationController
 	def create
 		@friendship = current_user.friendships.build(:friend_id => params[:friend_id])
 		if @friendship.save
-			flash[:success] = "Added friend."
+			flash[:success] = "Friend have been added"
 			redirect_to users_path
 		else
 		    flash[:danger] = "Unable to add friend."

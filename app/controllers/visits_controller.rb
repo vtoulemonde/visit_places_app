@@ -58,8 +58,11 @@ class VisitsController < ApplicationController
 	def destroy
 		@visit = Visit.find(params[:id])
 		@visit.destroy
-		flash[:success] = "Your visit has been deleted."
-		redirect_to user_visits_path(current_user)
+		if @visit.destroy
+	    	render json: {}
+	  	else
+	    	render status: 400, nothing: true
+	  	end
 	end
 
 	private
