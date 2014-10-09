@@ -15,11 +15,13 @@ class UsersController < ApplicationController
 
     def index
         @users = []
-        if (params[:search] == '')
+        if params[:search] == ''
             @users = User.all
-        else
-            @users = User.where(username: params[:search])
+        elsif !params[:search].nil?
+            search = params[:search].downcase
+            @users = User.where("lower(username) like ?", "%#{search}%")
         end
+
         render :index
     end
 

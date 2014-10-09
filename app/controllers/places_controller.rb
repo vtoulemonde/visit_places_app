@@ -13,7 +13,7 @@ class PlacesController < ApplicationController
 	def search_result
 		@search = params[:search]
 		# Search in database
-		@places = Place.where("name like ? or address like ?", "%#{@search}%", "%#{@search}%")
+		@places = Place.where("lower(name) like ? or lower(address) like ?", "%#{@search.downcase}%", "%#{@search.downcase}%")
 		# Search with google maps API
 		@data = search_geocoding @search
 		
