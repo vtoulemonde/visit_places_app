@@ -56,9 +56,8 @@ class VisitsController < ApplicationController
 	end
 
 	def destroy
-		@visit = Visit.find(params[:id])
-		@visit.destroy
-		if @visit.destroy
+		visit = Visit.find(params[:id])
+		if visit.destroy
 	    	render json: {}
 	  	else
 	    	render status: 400, nothing: true
