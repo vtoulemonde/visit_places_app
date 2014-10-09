@@ -11,6 +11,10 @@
 /*Style for Google Map*/
 #map-canvas { height: 200px; width: 100%; margin: 0; padding: 0;}
 
+.big-map {
+	height: 400px !important;
+}
+
 /*Style for 5 stars rating*/
 .rating > span:hover:before {
    content: "\2605";
