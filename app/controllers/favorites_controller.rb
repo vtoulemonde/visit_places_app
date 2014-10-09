@@ -28,6 +28,16 @@ class FavoritesController < ApplicationController
 	  	end
 	end
 
+	def delete_favorite
+		favorite = Favorite.find_by({user_id: session[:current_user_id], place_id: params[:place_id]})
+		puts favorite
+		if favorite.destroy
+	    	render json: {}
+	  	else
+	    	render status: 400, nothing: true
+	  	end
+	end
+
 	private
 
 	def favorite_params

@@ -63,3 +63,20 @@
 .small-img {
 	max-height: 180px;
 }
+
+/*===================================*/
+.corner-icon {
+	position:absolute !important;
+	top: 0 !important;
+	right:0 !important;
+	font-size: 20px !important;
+	
+	/*width: 0 !important;
+	height: 0 !important;
+	border-top: 20px solid gray !important;
+	border-left: 20px solid transparent !important; */
+}
+
+.red {
+	color: red;
+}
