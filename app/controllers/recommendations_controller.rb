@@ -27,9 +27,9 @@ class RecommendationsController < ApplicationController
   	recommendation = Recommendation.find(params[:id])
     if recommendation.destroy
         render json: {}
-      else
+    else
         render status: 400, nothing: true
-      end
+    end
   end
 
   def show
