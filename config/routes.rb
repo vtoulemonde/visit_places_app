@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  get 'favorites/index'
+
   resources 'friendships'
 
 	get 'search' =>'places#search'
@@ -23,5 +25,7 @@ Rails.application.routes.draw do
 
   post 'sessions' => 'sessions#create'
   delete 'sessions' => 'sessions#destroy'
+
+  resources :favorites
 
 end

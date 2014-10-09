@@ -26,7 +26,7 @@
 	  <div class="media-body">
 	    <h4 class="media-heading"><%=place.name%></h4>
 	    <%=place.address%> - <%=place.gender%>
-	    <%= link_to "Choose", place_path(place), class: "btn btn-primary"%>
+	    <%= link_to "Choose", new_place_visit_path(place), class: "btn btn-primary"%>
 	  </div>
 	</div>
 	<% end %>

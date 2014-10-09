@@ -26,7 +26,13 @@
 				    </div>
 		        </p>
 		        <p><%=visit.comment%></p>
-		        <p><%= link_to "Detail", place_visit_path(visit.place, visit), class:"btn btn-default"%></p>
+		        <p><%= link_to "Detail", place_visit_path(visit.place, visit), class:"btn btn-default"%>
+		        <% if current_user.is_favorite?(visit.place) %>
+	        		<span class="btn btn-default glyphicon glyphicon-heart" style= "color:red;"></span>
+	        	<% else %>
+	        		<a class="btn btn-default glyphicon glyphicon-heart-empty" data-id="<%=visit.place.id%>" href="#"></a>	
+	        	<% end %>
+	        	</p>
 		      </div>
 		    </div>
 		  </div>
@@ -36,3 +42,8 @@
 <% else %>
     <%= render partial: "welcome/forms" %>
 <% end %>
+
+<script type="text/javascript">
+	// Add place to favorites
+	$('.glyphicon-heart-empty').click(addToFavorites);
+</script>

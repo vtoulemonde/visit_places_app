@@ -30,9 +30,13 @@
 					    </div>
 			        </p>
 			        <p><%=recommendation.visit.comment%></p>
-			        
 			        <p>
 			        	<%= link_to 'Detail', recommendation_path(recommendation), class:"btn btn-default" %>
+			        	<% if current_user.is_favorite?(recommendation.visit.place) %>
+			        		<span class="btn btn-default glyphicon glyphicon-heart" style= "color:red;"></span>
+			        	<% else %>
+			        		<a class="btn btn-default glyphicon glyphicon-heart-empty" data-id="<%=recommendation.visit.place.id%>" href="#"></a>	
+			        	<% end %>
 			        	<% if current_user.id == @user.id%>
 			        		<a class="btn btn-default glyphicon glyphicon-trash" data-id="<%=recommendation.id%>" href="#"></a>
 					    <% end %>
@@ -70,5 +74,8 @@
 			$('#recommendation_'+id).remove();
 		});
 	});
+
+	// Add place to favorites
+	$('.glyphicon-heart-empty').click(addToFavorites;
 
 </script>

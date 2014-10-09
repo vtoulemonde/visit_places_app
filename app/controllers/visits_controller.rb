@@ -8,6 +8,11 @@ class VisitsController < ApplicationController
 		end
 	end
 
+	def new
+		@place = Place.find(params[:place_id])
+		@visit = Visit.new
+	end
+
 	def create
 		@place = Place.find(params[:place_id])
 		@visit = Visit.new visit_params
@@ -56,9 +61,8 @@ class VisitsController < ApplicationController
 	end
 
 	def destroy
-		@visit = Visit.find(params[:id])
-		@visit.destroy
-		if @visit.destroy
+		visit = Visit.find(params[:id])
+		if visit.destroy
 	    	render json: {}
 	  	else
 	    	render status: 400, nothing: true

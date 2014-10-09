@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 	has_secure_password
 	validates :username, :email, presence: true
 	has_many :visits
+	has_many :favorites
 
 	has_many :friendships
 	has_many :friends, :through => :friendships
@@ -23,6 +24,15 @@ class User < ActiveRecord::Base
 	def is_my_friend?(my_friend)
 		friendships.each do |friendship|
 			if friendship.friend_id == my_friend.id
+				return true
+			end
+		end
+		return false
+	end
+
+	def is_favorite?(the_place)
+		favorites.each do |favorite|
+			if favorite.place_id == the_place.id
 				return true
 			end
 		end

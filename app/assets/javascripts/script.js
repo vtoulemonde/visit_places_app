@@ -144,7 +144,63 @@ function initializeRecommendationsMap(){
         map: map,
         title: title
       });
-
     }
+}
+
+function initializeFavoritesMap(){
+  var mapOptions = {
+      center: { lat: 37.7597727, lng: -122.427063},
+      zoom: 12
+    };
+
+    var map = new google.maps.Map(document.getElementById('map-canvas'),
+        mapOptions);
+
+      var request = $.ajax({
+        url: "/favorites",
+        type: "GET",
+        dataType: "json"
+      });
+
+    request.done(function(data){
+      var latlngbounds = new google.maps.LatLngBounds( );
+      for(var i = 0; i < data.length; i++){
+        var myLatlng = new google.maps.LatLng(data[i].place.lat, data[i].place.lng);
+        createPin(myLatlng, data[i].place.name);
+        latlngbounds.extend(myLatlng);
+      }
+      //Recenter and resize the map
+      map.fitBounds( latlngbounds );
+    });
+
+    function createPin(myLatlng, title){
+      new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: title
+      });
+    }
+}
+
+// Add place to favorites
+function addToFavorites(e){
+    e.preventDefault();
+    var id = $(e.target).data("id");
+
+    data_hash = { favorite: {place_id: id } }
+
+    var request = $.ajax({
+      url: "/favorites/",
+      type: "POST", 
+      data: data_hash,
+      dataType: "json"
+    });
+
+    request.done(function(data){
+      $(e.target).addClass("glyphicon-heart");
+      $(e.target).css({"color" : "red"});
+      $(e.target).removeClass("glyphicon-heart-empty");
+      $(e.target).unbind('click');
+    });
 }
 
