@@ -1,10 +1,7 @@
 <h1>New recommendations</h1>
 
-
-<% if @recommendation.errors.any? %>
-  <% @recommendation.errors.full_messages.each do |msg| %>
-    <p><%= msg %></p>
-  <% end %>
+<% if @recommendation %>
+    <%= render partial: "shared/form_error_list", locals: { model: @recommendation } %>
 <% end %>
 
 <%= render partial: "places/place", object: @visit.place, as: 'place' %>

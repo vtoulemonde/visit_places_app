@@ -55,7 +55,8 @@ function initialize() {
     		e.preventDefault();
     	  	var address = $('#place_address').val();
     	  	var geo_url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyBMjQW_pHVa_SJleQQX2BC51pJ4UyhVbK0"
-    	  	var request = $.ajax({
+    	  	
+          var request = $.ajax({
     	  		url: geo_url,
     	  		type: "GET",
     	  		dataType: "json"
@@ -78,6 +79,7 @@ function initialize() {
 }
 
 function initializeVisitsMap(){
+
   var mapOptions = {
       center: { lat: 37.7597727, lng: -122.427063},
       zoom: 12
@@ -89,7 +91,8 @@ function initializeVisitsMap(){
       var request = $.ajax({
         url: "/users/"+$('#user_id').val()+"/visits",
         type: "GET",
-        dataType: "json"
+        dataType: "json",
+        cache: false
       });
 
     request.done(function(data){
@@ -113,6 +116,7 @@ function initializeVisitsMap(){
 }
 
 function initializeRecommendationsMap(){
+
   var mapOptions = {
       center: { lat: 37.7597727, lng: -122.427063},
       zoom: 12
@@ -124,7 +128,8 @@ function initializeRecommendationsMap(){
       var request = $.ajax({
         url: "/users/"+$('#user_id').val()+"/recommendations",
         type: "GET",
-        dataType: "json"
+        dataType: "json",
+        cache: false
       });
 
     request.done(function(data){
@@ -148,6 +153,7 @@ function initializeRecommendationsMap(){
 }
 
 function initializeFavoritesMap(){
+
   var mapOptions = {
       center: { lat: 37.7597727, lng: -122.427063},
       zoom: 12
@@ -159,7 +165,8 @@ function initializeFavoritesMap(){
       var request = $.ajax({
         url: "/favorites",
         type: "GET",
-        dataType: "json"
+        dataType: "json",
+        cache: false
       });
 
     request.done(function(data){

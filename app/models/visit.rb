@@ -3,5 +3,7 @@ class Visit < ActiveRecord::Base
   belongs_to :user
   has_many :recommendations
   has_many :photos
+
+  validates :date, presence: true
  
 end

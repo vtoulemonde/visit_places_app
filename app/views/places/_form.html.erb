@@ -1,12 +1,10 @@
+<% if @place %>
+    <%= render partial: "shared/form_error_list", locals: { model: @place } %>
+<% end %>
+
 <div class="row">
 
   <div class="col-md-7 border_box">
-
-    <% if @place.errors.any? %>
-      <% @place.errors.full_messages.each do |msg| %>
-        <p><%= msg %></p>
-      <% end %>
-    <% end %>
 
     <%= form_for @place do |f| %>
 
