@@ -1,16 +1,41 @@
+Description: 
+Dream Places is about not having regrets. The world is beautiful and full of amazing places and people that many of us just wish we could go and explore.
 
-== README
+Dream Places helps you do just that.
 
-Description: A paragraph elevator pitch of your project
+Dream Places helps you create their perfect trips or vacations. With recommendations from friends, you get advice from friends who have been there done that. Your trip is built on advice that you can trust, ensuring the most awesome trip experience.
 
-Another Link to Heroku hosted project
 
-Wireframes - This is a good opportunity to map out what will require AJAX
+Heroku link:
+http://fathomless-ocean-5895.herokuapp.com/
 
-User Stories, Site Flow, or equivalent for MVP
 
-API's used
+Wireframes:
+Hand drawn
 
-Wishlist
 
-Contributors
+User Stories, Site Flow, or equivalent for MVP:
+
+
+API's used:
+Google Maps
+Mail Gun
+
+
+Gems used:
+bcrypt, devise, carrierwave, mini_magick, unicorn, rails_12factor
+
+
+Wishlist:
+Homepage with full screen background photo (possibly with carousel)
+Reorder my favourites (drag and drop)
+Removing photos in Visits edit
+Add a description on the place
+Create a place and visit at the same time
+Host photos on Amazon S3
+Sell website to Facebook and become billionaires
+
+
+Contributors:
+Valentine
+Coen
