@@ -15,20 +15,6 @@
 	height: 400px !important;
 }
 
-/*Style for 5 stars rating*/
-.rating > span:hover:before {
-   content: "\2605";
-   position: absolute;
-}
-
-.rating {
-	color: gray;
-}
-
-.on {
-	color: orange;
-}
-
 .hidden {
 	visibility: hidden;
 }
@@ -57,7 +43,7 @@
 	max-height: 180px;
 }
 
-/*===================================*/
+/*Style for favorites and five stars rating*/
 .corner-icon {
 	position:absolute !important;
 	top: 0 !important;
@@ -75,4 +61,14 @@
 
 .glyphicon-star-empty {
 	color: gray;
+}
+
+.btn-default {
+	background-color: #eeeeee !important;
+	border-color: #bbbbbb !important;
+}
+
+/*Style for navbar*/
+.navbar.navbar-default.navbar-fixed-top.custom {
+	border-bottom: 1px solid #4177ae;
 }
