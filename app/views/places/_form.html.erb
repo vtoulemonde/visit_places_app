@@ -30,14 +30,16 @@
         <%= f.file_field :picture %>
       </div>
       <div class="form-group">
-        <%= f.label "Type"%>
+        <%= f.label "Type"%>&nbsp;&nbsp;&nbsp;&nbsp;
         <%= f.select :gender, options_for_select(%w[Restaurant Bar/Club Museum Art Park Other]) %>
-      <!--   <%= f.text_field :gender %> -->
       </div>
       <div class="form-group">
-        <%= f.label :price %>
-        <!-- <%= f.text_field :price %> -->
-        <%= f.select :price, options_for_select(%w[Free $ $$ $$$]) %>
+        <%=@place.price%>
+        <%= f.label :price %>&nbsp;&nbsp;&nbsp;&nbsp;
+        <%= f.radio_button :price,'Free', :checked => (@place.price == "Free") %> Free&nbsp;&nbsp;
+        <%= f.radio_button :price,'$', :checked => (@place.price == "$") %> $&nbsp;&nbsp;
+        <%= f.radio_button :price,'$$', :checked => (@place.price == "$$") %> $$&nbsp;&nbsp;
+        <%= f.radio_button :price,'$$$', :checked => (@place.price == "$$$") %> $$$
       </div>
       <div>
         <%= f.submit class:"btn btn-default"%>

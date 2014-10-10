@@ -17,38 +17,69 @@
 
 <!-- Result of search in database -->
 <% if !@places.empty?%>
-	<h2>Existing places</h2>
-	<% @places.each do |place|%>
-	<div class="media">
-	  <a class="pull-left" href="#">
-	  	<%= image_tag(place.picture_url, :width => 100, class: "media-object img-thumbnail") if place.picture.present? %>
-	  </a>
-	  <div class="media-body">
-	    <h4 class="media-heading"><%=place.name%></h4>
-	    <%=place.address%> - <%=place.gender%>
-	    <%= link_to "Choose", new_place_visit_path(place), class: "btn btn-default"%>
-	  </div>
+<h3>Existing places</h3>
+<div class="row">
+	<div class="col-md-6">
+		<ul class="list-group">
+			<% @places.each_with_index do |place, index|%>
+				<li class="list-group-item">
+					<div class="row">
+					  	<div class="col-md-8">
+						    <h5 class="media-heading"><%=place.name%></h5>
+						    <%=place.address%> - <%=place.gender%>
+						</div>
+						<div class="col-md-2">
+					  		<%= image_tag(place.picture_url, :height => 100, class: "media-object img-thumbnail") if place.picture.present? %>
+					  	</div>
+						<div class="col-md-2">
+						    <%= link_to "Choose", new_place_visit_path(place), class: "btn btn-default"%>
+						</div>
+					</div>
+				</li>
+				<% if index == (@places.length/2)%>
+					</ul>
+					</div>
+					<div class="col-md-6">
+					<ul class="list-group">
+				<% end %>
+			<% end %>
+		</ul>
 	</div>
-	<% end %>
+</div>
 <% end %>
 
 <!-- Result of search with Google Map API -->
 <% if !@data.empty?%>
-	<h2>Suggesting places by Google Maps</h2>
-	<% @data.each do |info|%>
-		<div class="media-body">
-			<%= form_tag new_place_path, method: :GET do %>
-				
-				<h4 class="media-heading"><%=info['formatted_address']%></h4>
-				<%= hidden_field_tag :name, @search%>
-				<%= hidden_field_tag :address, info['formatted_address']%>
-				<%= hidden_field_tag :lat, info['geometry']['location']['lat']%>
-				<%= hidden_field_tag :lng, info['geometry']['location']['lng']%>
-				<%= submit_tag "Choose", class: "btn btn-default"%>
+<h3>Suggesting places by Google Maps</h3>
+<div class="row">
+	<div class="col-md-6">
+		<ul class="list-group">
+			<% @data.each_with_index do |info, index|%>
+				<li class="list-group-item">
+					<div class="row">
+					  	<div class="col-md-9">
+						    <h5 class="media-heading"><%=info['formatted_address']%></h5>
+						</div>
+						<div class="col-md-3">
+						    <%= form_tag new_place_path, method: :GET do %>		
+								<%= hidden_field_tag :name, @search%>
+								<%= hidden_field_tag :address, info['formatted_address']%>
+								<%= hidden_field_tag :lat, info['geometry']['location']['lat']%>
+								<%= hidden_field_tag :lng, info['geometry']['location']['lng']%>
+								<%= submit_tag "Choose", class: "btn btn-default"%>
+							<% end %>
+						</div>
+					</div>
+				</li>
+				<% if index == (@places.length/2)%>
+					</ul>
+					</div>
+					<div class="col-md-6">
+					<ul class="list-group">
+				<% end %>
 			<% end %>
-		</div>
-	<% end %>
+		</ul>
+	</div>
+</div>
 <% end %>
-
-<br>
 

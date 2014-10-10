@@ -15,13 +15,15 @@
         <div class="form-group">
           <%= f.label "Rate your experience" %>
           <%= f.hidden_field :rating, class: "form-control" %>
-          <div class="rating">
-            <span id="rate_0" data-score="1">☆</span>
-            <span id="rate_1" data-score="2">☆</span>
-            <span id="rate_2" data-score="3">☆</span>
-            <span id="rate_3" data-score="4">☆</span>
-            <span id="rate_4" data-score="5">☆</span>
-          </div>
+          <div class="rating2">
+              <% for i in (1..5)%>
+                <% if i <= @visit.rating %>
+                  <span class="glyphicon glyphicon-star" id="rate2_<%=i%>" data-score="<%=i%>"></span>
+                <% else %>
+                  <span class="glyphicon glyphicon-star-empty" id="rate2_<%=i%>" data-score="<%=i%>"></span>
+                <% end%>
+              <% end %>
+        </div>
         </div>
         <div class="form-group">
           <%= f.label "Comment on the visit" %>
@@ -53,20 +55,20 @@
 
 <script type="text/javascript">
 
-function displayStarRating(){
-  $('.rating').children().removeClass('on');
+function displayStarRating2(){
+  $('.rating2').children().addClass('glyphicon-star-empty');
   if ($('#visit_rating').val() > 0){
-    for (var i =0; i< $('#visit_rating').val(); i++){
-      $('#rate_'+i).addClass('on');
+    for (var i =1; i<= $('#visit_rating').val(); i++){
+      $('#rate2_'+i).removeClass('glyphicon-star-empty');
+      $('#rate2_'+i).addClass('glyphicon-star');
     }
   }
 }
 
-$('.rating').on('click', function(e){
+$('.rating2').on('click', function(e){
   $('#visit_rating').val(e.target.dataset.score);
-  displayStarRating();
-  
+  displayStarRating2();
 });
 
-displayStarRating();
+
 </script>

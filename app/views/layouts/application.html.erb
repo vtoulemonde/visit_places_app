@@ -12,7 +12,7 @@
 <body>
 
     <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-default navbar-fixed-top custom" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -57,15 +57,6 @@
 
     <div class="container">
       <br><br><br><br>
-
-      <!-- Main component for a primary marketing message or call to action -->
-      <!-- <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-        </p>
-      </div> -->
 
       <% flash.each do |name, msg| %>
           <%= content_tag :div, msg, class: "alert alert-#{name}"%>

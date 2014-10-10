@@ -8,9 +8,9 @@
 			  <div class="col-sm-6 col-md-4" id="visit_<%=visit.id%>">
 			    <div class="thumbnail" style="position: relative;">
 			    	<% if current_user.is_favorite?(visit.place) %>
-		        		<a class="btn glyphicon glyphicon-heart corner-icon red" data-id="<%=visit.place.id%>" href="#"></a>
+		        		<a class="btn glyphicon glyphicon-heart corner-icon" data-id="<%=visit.place.id%>" href="#" title="Favorites"></a>
 		        	<% else %>
-		        		<a class="btn glyphicon glyphicon-heart-empty corner-icon" data-id="<%=visit.place.id%>" href="#"></a>
+		        		<a class="btn glyphicon glyphicon-heart-empty corner-icon" data-id="<%=visit.place.id%>" href="#" title="Favorites"></a>
 		        	<% end %>
 
 			    	<% if visit.place.picture.present? %>
@@ -26,20 +26,20 @@
 			        	<div>
 			        		<% for i in (1..5)%>
 			        			<% if i <= visit.rating %>
-			        				<span class='on'>☆</span>
+			        				<span class="glyphicon glyphicon-star"></span>
 			        			<% else %>
-			        				<span>☆</span>
+			        				<span class="glyphicon glyphicon-star-empty"></span>
 			        			<% end%>
 			        		<% end %>
 					    </div>
 			        </p>
 			        <p><%=visit.comment%></p>
 			        <p>
-			        	<%= link_to "Detail", place_visit_path(visit.place, visit), class:"btn btn-default"%>
+			        	<%= link_to "Detail", place_visit_path(visit.place, visit), class:"btn btn-default", title:"Detail"%>
 			        	<% if current_user.id == visit.user.id %>
-				        	<%= link_to "", edit_place_visit_path(visit.place, visit), class:"btn btn-default glyphicon glyphicon-pencil"%>
-						    <%= link_to "", new_visit_recommendation_path(visit), class:"btn btn-default glyphicon glyphicon-share"%>
-						    <a class="btn btn-default glyphicon glyphicon-trash" data-id="<%=visit.id%>" href="#"></a>
+				        	<%= link_to "", edit_place_visit_path(visit.place, visit), class:"btn btn-default glyphicon glyphicon-pencil", title:"Edit"%>
+						    <%= link_to "", new_visit_recommendation_path(visit), class:"btn btn-default glyphicon glyphicon-share", title:"Recommed to a friend"%>
+						    <a class="btn btn-default glyphicon glyphicon-trash" data-id="<%=visit.id%>" href="#" title="Delete"></a>
 
 					    <% end %>
 			        </p>

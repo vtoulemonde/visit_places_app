@@ -1,7 +1,7 @@
 class PlacesController < ApplicationController
 
 	def index
-		@places = Place.all
+		@places = Place.all.order('name')
 	end
 
 	def search
@@ -54,9 +54,9 @@ class PlacesController < ApplicationController
 		@place = Place.new(place_params)
 		if @place.save
 			flash[:success] = "Your place has been created."
-			redirect_to place_path(@place)
+			redirect_to new_place_visit_path(@place)
 		else
-			render 'new'
+			render :new
 		end
 	end
 

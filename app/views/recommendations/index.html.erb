@@ -7,9 +7,9 @@
 			  <div class="col-sm-6 col-md-4" id="recommendation_<%=recommendation.id%>">
 			    <div class="thumbnail" style="position: relative;">
 			    	<% if current_user.is_favorite?(recommendation.visit.place) %>
-		        		<a class="btn glyphicon glyphicon-heart corner-icon red " data-id="<%=recommendation.visit.place.id%>" href="#"></a>
+		        		<a class="btn glyphicon glyphicon-heart corner-icon" data-id="<%=recommendation.visit.place.id%>" href="#" title="Favorites"></a>
 		        	<% else %>
-		        		<a class="btn glyphicon glyphicon-heart-empty corner-icon" data-id="<%=recommendation.visit.place.id%>" href="#"></a>	
+		        		<a class="btn glyphicon glyphicon-heart-empty corner-icon" data-id="<%=recommendation.visit.place.id%>" href="#" title="Favorites"></a>	
 		        	<% end %>
 
 			    	<% if recommendation.visit.place.picture.present? %>
@@ -28,19 +28,19 @@
 			        	<div>
 			        		<% for i in (1..5)%>
 			        			<% if i <= recommendation.visit.rating %>
-			        				<span class='on'>☆</span>
+			        				<span class="glyphicon glyphicon-star"></span>
 			        			<% else %>
-			        				<span>☆</span>
+			        				<span class="glyphicon glyphicon-star-empty"></span>
 			        			<% end%>
 			        		<% end %>
 					    </div>
 			        </p>
 			        <p><%=recommendation.visit.comment%></p>
 			        <p>
-			        	<%= link_to 'Detail', recommendation_path(recommendation), class:"btn btn-default" %>
+			        	<%= link_to 'Detail', recommendation_path(recommendation), class:"btn btn-default", title: "Detail" %>
 			        	
 			        	<% if current_user.id == @user.id%>
-			        		<a class="btn btn-default glyphicon glyphicon-trash" data-id="<%=recommendation.id%>" href="#"></a>
+			        		<a class="btn btn-default glyphicon glyphicon-trash" data-id="<%=recommendation.id%>" href="#" title="Delete"></a>
 					    <% end %>
 			        </p>
 			      </div>
