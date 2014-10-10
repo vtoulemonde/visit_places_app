@@ -1,9 +1,9 @@
 <h2>Following</h2>
-
+<hr>
 <div class="row text-center"> 
   <% current_user.friendships.each do |friendship|%>
     <div class="col-sm-6 col-md-3">
-      <div class="thumbnail" style="min-height:400px;height:50px;">
+      <div class="thumbnail" style="min-height:400px;height:auto;">
       <%= image_tag(friendship.friend.picture_url, :width => 250, class: "img-rounded") if friendship.friend.picture.present? %>
       <div class="caption">
         <h4><%= friendship.friend.username%></h4>
@@ -19,7 +19,7 @@
 </div>
 
 <h2>Followers</h2>
-
+<hr>
 <div class="row text-center">    
   <% current_user.inverse_friends.each do |user|%>
     <div class="col-sm-6 col-md-3">
