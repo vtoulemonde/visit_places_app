@@ -4,14 +4,15 @@
 			<h4><%=visit.user.username%>'s visit</h4>
 			<p><strong>Date of visit: </strong><%=visit.date%></p>
 			<p>
-				<input type='hidden' id='visit_rating' value='<%=visit.rating%>'>
 				<div>
-			      <span id="rate_0" data-score="1">☆</span>
-			      <span id="rate_1" data-score="2">☆</span>
-			      <span id="rate_2" data-score="3">☆</span>
-			      <span id="rate_3" data-score="4">☆</span>
-			      <span id="rate_4" data-score="5">☆</span>
-			    </div>
+	        		<% for i in (1..5)%>
+	        			<% if i <= visit.rating %>
+	        				<span class="glyphicon glyphicon-star"></span>
+	        			<% else %>
+	        				<span class="glyphicon glyphicon-star-empty"></span>
+	        			<% end%>
+	        		<% end %>
+				</div>
 			</p>
 			<p><strong>Comment on the visit: </strong><%=visit.comment%></p>
 		</div>
@@ -59,11 +60,5 @@
 $(document).ready(function(){
      $("#myCarousel").carousel();
 });
-
-  if ($('#visit_rating').val() > 0){
-    for (var i =0; i< $('#visit_rating').val(); i++){
-      $('#rate_'+i).addClass('on');
-    }
-  }
 
 </script>
