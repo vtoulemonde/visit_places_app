@@ -1,6 +1,6 @@
 <% if logged_in? %>
-	<h1>Here are some places your friends visited lastly</h1>
-
+	<!-- <h1>Here are some places your friends visited lastly</h1> -->
+	<h1>Some interesting places your friends visited recently</h1>
 	<div class="row">
 	<% @visits.each do |visit|%>
 		  <div class="col-sm-3 col-md-3" id="visit_<%=visit.id%>">
