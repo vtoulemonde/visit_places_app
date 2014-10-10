@@ -1,7 +1,7 @@
 
 <div class="row">
-	<h1>All past visits of <%=@user.username%></h1>
-
+	<h1><%=@user.username%>, here are all the interesting places you've visited</h1>
+	<hr>
 	<div class="col-md-8">
 		<div class="row">
 		<% @visits.each do |visit|%>
