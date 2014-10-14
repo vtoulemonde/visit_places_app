@@ -51,3 +51,5 @@ gem 'unicorn'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# Gon gem for including ENV variables in js file
+gem 'gon'
