@@ -10,13 +10,16 @@ To get it running on your local machine, you'll need to create a file called `lo
 * GOOGLE_MAP_API_KEY
 * MAILGUN_DOMAIN
 * MAILGUN_API_KEY
+* AWS_ACCESS_KEY_ID (for Amazon S3 service)
+* AWS_SECRET_ACCESS_KEY (for Amazon S3 service)
+* AWS_BUCKET_NAME for Amazon S3 service)
 
 ###Heroku link
 http://fathomless-ocean-5895.herokuapp.com/
 
 ###Technical
 *API's used: Google Maps, Mail Gun
-*Gems used: bcrypt, devise, carrierwave, mini_magick, unicorn, rails_12factor, gon
+*Gems used: bcrypt, devise, carrierwave, mini_magick, unicorn, rails_12factor, gon, fog
 
 ###Wishlist
 * Homepage with full screen background photo (possibly with carousel)
