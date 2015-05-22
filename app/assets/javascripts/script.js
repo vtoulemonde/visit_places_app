@@ -42,8 +42,8 @@ function initialize() {
     if($('#map-canvas').data('map') === 'enable') {
     	// Add an event when click on the map to update the address
     	google.maps.event.addListener(map, 'click', function(event) {
-    		var click_lat = event.latLng.k;
-    		var click_lng = event.latLng.B;
+    		var click_lat = event.latLng.A;
+    		var click_lng = event.latLng.F;
         
     		clearPin();
     		createPin(click_lat, click_lng, false);

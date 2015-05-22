@@ -16,6 +16,7 @@ class PlacesController < ApplicationController
 		@places = Place.where("lower(name) like ? or lower(address) like ?", "%#{@search.downcase}%", "%#{@search.downcase}%")
 		# Search with google maps API
 		@data = search_geocoding @search
+		gon.googleMapApiKey = ENV['GOOGLE_MAP_API_KEY']
 		
 		if @places.empty? && @data.empty?
 			@place = Place.new
